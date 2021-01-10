@@ -1,7 +1,7 @@
 package id_validator
 
 import (
-	"fmt"
+	"errors"
 	"strconv"
 
 	"id-validator/data"
@@ -39,7 +39,7 @@ func GetInfo(id string) map[string]string {
 	code := GenerateType(id)
 
 	addressInfo := GetAddressInfo(code["addressCode"], code["birthdayCode"])
-	fmt.Println(addressInfo)
+	// fmt.Println(addressInfo)
 	address, _ := strconv.Atoi(code["addressCode"])
 	abandoned := "0"
 	if data.AddressCode[address] == "" {
@@ -66,4 +66,36 @@ func GetInfo(id string) map[string]string {
 	}
 
 	return info
+}
+
+// 生成假数据
+func FakeId(isEighteen bool, address string, birthday string, sex int) string {
+	// 生成地址码
+	addressCode := GeneratorAddressCode(address)
+
+	// 出生日期码
+	birthdayCode := GeneratorBirthdayCode(birthday)
+
+	// 顺序码
+	orderCode := GeneratorOrderCode(sex)
+
+	if !isEighteen {
+		return addressCode + Substr(birthdayCode, 2, 6) + orderCode
+	}
+
+	body := addressCode + birthdayCode + orderCode
+
+	return body + GeneratorCheckBit(body)
+}
+
+// 15位升级18位号码
+func UpgradeId(id string) (string, error) {
+	if !IsValid(id) {
+		return "", errors.New("Not Valid ID card number.")
+	}
+
+	code := GenerateShortType(id)
+	body := code["addressCode"] + code["birthdayCode"] + code["order"]
+
+	return body + GeneratorCheckBit(body), nil
 }
