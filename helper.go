@@ -2,6 +2,7 @@ package id_validator
 
 import (
 	"strconv"
+	"strings"
 
 	"id-validator/data"
 )
@@ -56,6 +57,36 @@ func GetAddress(addressCode string, birthdayCode string) string {
 	}
 
 	return address
+}
+
+// 获取星座信息
+func GetConstellation(birthdayCode string) string {
+	monthStr := Substr(birthdayCode, 4, 6)
+	dayStr := Substr(birthdayCode, 6, 8)
+	month, _ := strconv.Atoi(monthStr)
+	day, _ := strconv.Atoi(dayStr)
+	startDate := data.Constellation[month]["start_date"]
+	startDay, _ := strconv.Atoi(strings.Split(startDate, "-")[1])
+	if day >= startDay {
+		return data.Constellation[month]["name"]
+	}
+
+	tmpMonth := month - 1
+	if month == 1 {
+		tmpMonth = 12
+	}
+
+	return data.Constellation[tmpMonth]["name"]
+}
+
+// 获取生肖信息
+func GetChineseZodiac(birthdayCode string) string {
+	// 子鼠
+	start := 1900
+	end, _ := strconv.Atoi(Substr(birthdayCode, 0, 4))
+	key := (end - start) % 12
+
+	return data.ChineseZodiac[key]
 }
 
 // Substr 截取字符串
