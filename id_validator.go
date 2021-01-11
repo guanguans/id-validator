@@ -2,9 +2,25 @@ package idvalidator
 
 import (
 	"errors"
-	"id-validator/data"
 	"strconv"
+	"time"
+
+	"id-validator/data"
 )
+
+// 身份证信息
+type IdInfo struct {
+	AddressCode   int
+	Abandoned     int
+	Address       string
+	AddressTree   []string
+	Birthday      time.Time
+	Constellation string
+	ChineseZodiac string
+	Sex           int
+	Length        int
+	CheckBit      int
+}
 
 // 验证身份证号合法性
 func IsValid(id string) bool {
@@ -28,42 +44,56 @@ func IsValid(id string) bool {
 }
 
 // 获取身份证信息
-func GetInfo(id string) map[string]string {
+func GetInfo(id string) (IdInfo, error) {
 	// 验证有效性
 	if !IsValid(id) {
-		return map[string]string{}
+		return IdInfo{}, errors.New("Not Valid ID card number.")
 	}
 
 	code, _ := GenerateCode(id)
+	addressCode, _ := strconv.Atoi(code["addressCode"])
 
+	// 地址信息
 	addressInfo := GetAddressInfo(code["addressCode"], code["birthdayCode"])
-	// fmt.Println(addressInfo)
-	address, _ := strconv.Atoi(code["addressCode"])
-	abandoned := "0"
-	if data.AddressCode[address] == "" {
-		abandoned = "1"
+	var addressTree []string
+	for _, val := range addressInfo {
+		addressTree = append(addressTree, val)
 	}
-	// birthday, _ := time.Parse("20060102", code["birthdayCode"])
 
-	sex := "1"
+	// 是否废弃
+	var abandoned int
+	if data.AddressCode[addressCode] == "" {
+		abandoned = 1
+	}
+
+	// 生日
+	birthday, _ := time.Parse("20060102", code["birthdayCode"])
+
+	// 性别
+	sex := 1
 	sexCode, _ := strconv.Atoi(code["order"])
 	if (sexCode % 2) == 0 {
-		sex = "0"
-	}
-	info := map[string]string{
-		"addressCode": code["addressCode"],
-		"abandoned":   abandoned,
-		"address":     addressInfo["province"] + addressInfo["city"] + addressInfo["district"],
-		// "addressTree": addressInfo,
-		// "birthdayCode": birthday,
-		"constellation": GetConstellation(code["birthdayCode"]),
-		"chineseZodiac": GetChineseZodiac(code["birthdayCode"]),
-		"sex":           sex,
-		"length":        code["type"],
-		"checkBit":      code["checkBit"],
+		sex = 0
 	}
 
-	return info
+	// 长度
+	length, _ := strconv.Atoi(code["type"])
+
+	// Bit码
+	checkBit, _ := strconv.Atoi(code["checkBit"])
+
+	return IdInfo{
+		AddressCode:   addressCode,
+		Abandoned:     abandoned,
+		Address:       addressInfo["province"] + addressInfo["city"] + addressInfo["district"],
+		AddressTree:   addressTree,
+		Birthday:      birthday,
+		Constellation: GetConstellation(code["birthdayCode"]),
+		ChineseZodiac: GetChineseZodiac(code["birthdayCode"]),
+		Sex:           sex,
+		Length:        length,
+		CheckBit:      checkBit,
+	}, nil
 }
 
 // 生成假身份证号码
