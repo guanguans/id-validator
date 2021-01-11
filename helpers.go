@@ -1,10 +1,9 @@
-package id_validator
+package idvalidator
 
 import (
+	"id-validator/data"
 	"strconv"
 	"strings"
-
-	"id-validator/data"
 )
 
 // 检查地址码
@@ -16,8 +15,7 @@ func GetAddressInfo(addressCode string, birthdayCode string) map[string]string {
 	}
 
 	// 省级信息
-	provinceAddressCode := Substr(addressCode, 0, 2) + "0000"
-	addressInfo["province"] = GetAddress(provinceAddressCode, birthdayCode)
+	addressInfo["province"] = GetAddress(Substr(addressCode, 0, 2)+"0000", birthdayCode)
 
 	// 用于判断是否是港澳台居民居住证（8字开头）
 	firstCharacter := Substr(addressCode, 0, 1)
@@ -27,8 +25,7 @@ func GetAddressInfo(addressCode string, birthdayCode string) map[string]string {
 	}
 
 	// 市级信息
-	cityAddressCode := Substr(addressCode, 0, 4) + "00"
-	addressInfo["city"] = GetAddress(cityAddressCode, birthdayCode)
+	addressInfo["city"] = GetAddress(Substr(addressCode, 0, 4)+"00", birthdayCode)
 
 	// 县级信息
 	addressInfo["district"] = GetAddress(addressCode, birthdayCode)
@@ -36,22 +33,17 @@ func GetAddressInfo(addressCode string, birthdayCode string) map[string]string {
 	return addressInfo
 }
 
+// 获取省市区地址码
 func GetAddress(addressCode string, birthdayCode string) string {
-	var address string
-
-	addressCodeStr, _ := strconv.Atoi(addressCode)
-	addressCodeTimeline := data.AddressCodeTimeline[addressCodeStr]
-
-	year := Substr(birthdayCode, 0, 4)
-	yearStr, _ := strconv.Atoi(year)
-
-	for key, val := range addressCodeTimeline {
-		if len(val) == 0 {
-			continue
-		}
-
+	address := ""
+	addressCodeInt, _ := strconv.Atoi(addressCode)
+	year, _ := strconv.Atoi(Substr(birthdayCode, 0, 4))
+	for key, val := range data.AddressCodeTimeline[addressCodeInt] {
+		// if len(val) == 0 {
+		// 	continue
+		// }
 		startYear, _ := strconv.Atoi(val["start_year"])
-		if (key == 0 && yearStr < startYear) || yearStr >= startYear {
+		if (key == 0 && year < startYear) || year >= startYear {
 			address = val["address"]
 		}
 	}
@@ -91,7 +83,7 @@ func GetChineseZodiac(birthdayCode string) string {
 
 // Substr 截取字符串
 func Substr(source string, start int, end int) string {
-	var r = []rune(source)
+	r := []rune(source)
 	length := len(r)
 
 	if start < 0 || end > length || start > end {

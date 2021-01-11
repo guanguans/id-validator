@@ -1,6 +1,7 @@
-package id_validator
+package idvalidator
 
 import (
+	"errors"
 	"regexp"
 	"strconv"
 	"strings"
@@ -8,29 +9,34 @@ import (
 )
 
 // 检查ID参数
-func CheckIdArgument(id string) bool {
-	return len(GenerateType(id)) != 0
+func CheckIDArgument(id string) bool {
+	_, err := GenerateCode(id)
+
+	return err == nil
 }
 
 // 生成数据
-func GenerateType(id string) map[string]string {
-	lowerId := strings.ToLower(id)
-
-	if len(lowerId) == 15 {
-		return GenerateShortType(id)
+func GenerateCode(id string) (map[string]string, error) {
+	length := len(id)
+	if length == 15 {
+		return GenerateShortCode(id)
 	}
 
-	if len(lowerId) == 18 {
-		return GenerateLongType(id)
+	if length == 18 {
+		return GenerateLongCode(id)
 	}
 
-	return map[string]string{}
+	return map[string]string{}, errors.New("Invalid ID card number length.")
 }
 
 // 生成短数据
-func GenerateShortType(id string) map[string]string {
+func GenerateShortCode(id string) (map[string]string, error) {
+	if len(id) != 15 {
+		return map[string]string{}, errors.New("Invalid ID card number length.")
+	}
+
 	mustCompile := regexp.MustCompile("(.{6})(.{6})(.{3})")
-	subMatch := mustCompile.FindStringSubmatch(id)
+	subMatch := mustCompile.FindStringSubmatch(strings.ToLower(id))
 
 	return map[string]string{
 		"body":         subMatch[0],
@@ -39,13 +45,16 @@ func GenerateShortType(id string) map[string]string {
 		"order":        subMatch[3],
 		"checkBit":     "",
 		"type":         "15",
-	}
+	}, nil
 }
 
 // 生成长数据
-func GenerateLongType(id string) map[string]string {
+func GenerateLongCode(id string) (map[string]string, error) {
+	if len(id) != 18 {
+		return map[string]string{}, errors.New("Invalid ID card number length.")
+	}
 	mustCompile := regexp.MustCompile("((.{6})(.{8})(.{3}))(.)")
-	subMatch := mustCompile.FindStringSubmatch(id)
+	subMatch := mustCompile.FindStringSubmatch(strings.ToLower(id))
 
 	return map[string]string{
 		"body":         subMatch[1],
@@ -54,14 +63,12 @@ func GenerateLongType(id string) map[string]string {
 		"order":        subMatch[4],
 		"checkBit":     subMatch[5],
 		"type":         "18",
-	}
+	}, nil
 }
 
 // 检查地址码
 func CheckAddressCode(addressCode string, birthdayCode string) bool {
-	addressInfo := GetAddressInfo(addressCode, birthdayCode)
-
-	return addressInfo["province"] != ""
+	return GetAddressInfo(addressCode, birthdayCode)["province"] != ""
 }
 
 // 检查出生日期码
@@ -71,9 +78,14 @@ func CheckBirthdayCode(birthdayCode string) bool {
 		return false
 	}
 
-	_, error := time.Parse("20060102", birthdayCode)
+	nowYear := time.Now().Year()
+	if year > nowYear {
+		return false
+	}
 
-	return error == nil
+	_, err := time.Parse("20060102", birthdayCode)
+
+	return err == nil
 }
 
 // 检查顺序码

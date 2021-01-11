@@ -1,4 +1,4 @@
-package id_validator
+package idvalidator
 
 import (
 	"id-validator/data"
@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-// 生成 Bit 码
+// 生成Bit码
 func GeneratorCheckBit(body string) string {
 	// 位置加权
 	var posWeight [19]float64
@@ -19,13 +19,13 @@ func GeneratorCheckBit(body string) string {
 		posWeight[i] = float64(weight)
 	}
 
-	// 累身份证号 body 部分与位置加权的积
-	bodySum := 0
+	// 累身份证号body部分与位置加权的积
+	var bodySum int
 	bodyArray := strings.Split(body, "")
 	count := len(bodyArray)
 	for i := 0; i < count; i++ {
-		bodySubStr, _ := strconv.Atoi(bodyArray[i])
-		bodySum += bodySubStr * int(posWeight[18-i])
+		bodySub, _ := strconv.Atoi(bodyArray[i])
+		bodySum += bodySub * int(posWeight[18-i])
 	}
 
 	// 生成校验码
@@ -38,17 +38,15 @@ func GeneratorCheckBit(body string) string {
 
 // 生成地址码
 func GeneratorAddressCode(address string) string {
-	var addressCodeInt int
+	addressCode := ""
 	for code, addressStr := range data.AddressCode {
 		if address == addressStr {
-			addressCodeInt = code
+			addressCode = strconv.Itoa(code)
 			break
 		}
 	}
-	addressCode := strconv.Itoa(addressCodeInt)
 
-	classification := AddressCodeClassification(strconv.Itoa(addressCodeInt))
-
+	classification := AddressCodeClassification(addressCode)
 	switch classification {
 	case "country":
 		// addressCode = GetRandAddressCode("\\d{4}(?!00)[0-9]{2}$")
@@ -97,7 +95,6 @@ func AddressCodeClassification(addressCode string) string {
 // 获取随机地址码
 func GetRandAddressCode(pattern string) string {
 	mustCompile := regexp.MustCompile(pattern)
-
 	var keys []string
 	for key := range data.AddressCode {
 		keyStr := strconv.Itoa(key)
@@ -106,48 +103,55 @@ func GetRandAddressCode(pattern string) string {
 		}
 	}
 
-	// initialize global pseudo random generator
 	rand.Seed(time.Now().Unix())
-	randKey := rand.Intn(len(keys))
 
-	return keys[randKey]
+	return keys[rand.Intn(len(keys))]
 }
 
 // 生成出生日期码
 func GeneratorBirthdayCode(birthday string) string {
-	year, _ := strconv.Atoi(DatePad(Substr(birthday, 0, 4), "year"))
-	month, _ := strconv.Atoi(DatePad(Substr(birthday, 4, 6), "month"))
-	day, _ := strconv.Atoi(DatePad(Substr(birthday, 6, 8), "day"))
+	year := DatePipelineHandle(DatePad(Substr(birthday, 0, 4), "year"), "year")
+	month := DatePipelineHandle(DatePad(Substr(birthday, 4, 6), "month"), "month")
+	day := DatePipelineHandle(DatePad(Substr(birthday, 6, 8), "day"), "day")
 
-	nowYear := time.Now().Year()
-	rand.Seed(time.Now().Unix())
-	if year < 1800 || year > nowYear {
-		randYear := rand.Intn(nowYear-1950) + 1950
-		year, _ = strconv.Atoi(DatePad(strconv.Itoa(randYear), "year"))
-	}
-	if month < 1 || month > 12 {
-		randMonth := rand.Intn(12-1) + 1
-		month, _ = strconv.Atoi(DatePad(strconv.Itoa(randMonth), "month"))
-	}
-	if day < 1 || day > 31 {
-		randDay := rand.Intn(28-1) + 1
-		day, _ = strconv.Atoi(DatePad(strconv.Itoa(randDay), "day"))
-	}
-
-	birthdayStr := DatePad(strconv.Itoa(year), "year") + DatePad(strconv.Itoa(month), "month") + DatePad(strconv.Itoa(day), "day")
-	_, error := time.Parse("20060102", birthdayStr)
+	birthday = year + month + day
+	_, error := time.Parse("20060102", birthday)
+	// example: 195578
 	if error != nil {
-		randYear := rand.Intn(nowYear-1950) + 1950
-		year, _ = strconv.Atoi(DatePad(strconv.Itoa(randYear), "year"))
-
-		randMonth := rand.Intn(12-1) + 1
-		month, _ = strconv.Atoi(DatePad(strconv.Itoa(randMonth), "month"))
-
-		randDay := rand.Intn(28-1) + 1
-		day, _ = strconv.Atoi(DatePad(strconv.Itoa(randDay), "day"))
+		year = DatePad(year, "year")
+		month = DatePad(month, "month")
+		day = DatePad(day, "day")
 	}
 
-	return DatePad(strconv.Itoa(year), "year") + DatePad(strconv.Itoa(month), "month") + DatePad(strconv.Itoa(day), "day")
+	return year + month + day
+}
+
+// 日期处理
+func DatePipelineHandle(date string, category string) string {
+	dateInt, _ := strconv.Atoi(date)
+
+	switch category {
+	case "year":
+		nowYear := time.Now().Year()
+		rand.Seed(time.Now().Unix())
+		if dateInt < 1800 || dateInt > nowYear {
+			randDate := rand.Intn(nowYear-1950) + 1950
+			date = strconv.Itoa(randDate)
+		}
+	case "month":
+		if dateInt < 1 || dateInt > 12 {
+			randDate := rand.Intn(12-1) + 1
+			date = strconv.Itoa(randDate)
+		}
+
+	case "day":
+		if dateInt < 1 || dateInt > 31 {
+			randDate := rand.Intn(28-1) + 1
+			date = strconv.Itoa(randDate)
+		}
+	}
+
+	return date
 }
 
 // 生成顺序码
@@ -155,7 +159,7 @@ func GeneratorOrderCode(sex int) string {
 	rand.Seed(time.Now().Unix())
 	orderCode := rand.Intn(999-111) + 111
 	if sex != orderCode%2 {
-		orderCode -= 1
+		orderCode--
 	}
 
 	return strconv.Itoa(orderCode)

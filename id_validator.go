@@ -1,4 +1,4 @@
-package id_validator
+package idvalidator
 
 import (
 	"errors"
@@ -8,12 +8,13 @@ import (
 
 // 验证身份证号合法性
 func IsValid(id string) bool {
-	if !CheckIdArgument(id) {
+	code, err := GenerateCode(id)
+	if err != nil {
 		return false
 	}
 
-	code := GenerateType(id)
-	if !CheckAddressCode(code["addressCode"], code["birthdayCode"]) || !CheckBirthdayCode(code["birthdayCode"]) || !CheckOrderCode(code["order"]) {
+	// 检查顺序码、生日码、地址码
+	if !CheckOrderCode(code["order"]) || !CheckBirthdayCode(code["birthdayCode"]) || !CheckAddressCode(code["addressCode"], code["birthdayCode"]) {
 		return false
 	}
 
@@ -22,10 +23,8 @@ func IsValid(id string) bool {
 		return true
 	}
 
-	// 验证：校验码
-	checkBit := GeneratorCheckBit(code["body"])
-
-	return code["checkBit"] == checkBit
+	// 校验码
+	return code["checkBit"] == GeneratorCheckBit(code["body"])
 }
 
 // 获取身份证信息
@@ -35,7 +34,7 @@ func GetInfo(id string) map[string]string {
 		return map[string]string{}
 	}
 
-	code := GenerateType(id)
+	code, _ := GenerateCode(id)
 
 	addressInfo := GetAddressInfo(code["addressCode"], code["birthdayCode"])
 	// fmt.Println(addressInfo)
@@ -67,15 +66,15 @@ func GetInfo(id string) map[string]string {
 	return info
 }
 
-// 生成假数据
-func FakeId(isEighteen bool, address string, birthday string, sex int) string {
+// 生成假身份证号码
+func Fake(isEighteen bool, address string, birthday string, sex int) string {
 	// 生成地址码
 	addressCode := GeneratorAddressCode(address)
 
 	// 出生日期码
 	birthdayCode := GeneratorBirthdayCode(birthday)
-	// fmt.Println(birthdayCode)
-	// 顺序码
+
+	// 生成顺序码
 	orderCode := GeneratorOrderCode(sex)
 
 	if !isEighteen {
@@ -88,12 +87,13 @@ func FakeId(isEighteen bool, address string, birthday string, sex int) string {
 }
 
 // 15位升级18位号码
-func UpgradeId(id string) (string, error) {
+func Upgrade(id string) (string, error) {
 	if !IsValid(id) {
 		return "", errors.New("Not Valid ID card number.")
 	}
 
-	code := GenerateShortType(id)
+	code, _ := GenerateShortCode(id)
+
 	body := code["addressCode"] + code["birthdayCode"] + code["order"]
 
 	return body + GeneratorCheckBit(body), nil
