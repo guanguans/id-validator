@@ -1,15 +1,13 @@
 package id_validator
 
 import (
-	"fmt"
+	"id-validator/data"
 	"math"
 	"math/rand"
 	"regexp"
 	"strconv"
 	"strings"
 	"time"
-
-	"id-validator/data"
 )
 
 // 生成 Bit 码
@@ -101,7 +99,7 @@ func GetRandAddressCode(pattern string) string {
 	mustCompile := regexp.MustCompile(pattern)
 
 	var keys []string
-	for key, _ := range data.AddressCode {
+	for key := range data.AddressCode {
 		keyStr := strconv.Itoa(key)
 		if mustCompile.MatchString(keyStr) && Substr(keyStr, 4, 6) != "00" {
 			keys = append(keys, keyStr)
@@ -136,7 +134,7 @@ func GeneratorBirthdayCode(birthday string) string {
 		day, _ = strconv.Atoi(DatePad(strconv.Itoa(randDay), "day"))
 	}
 
-	birthdayStr := strconv.Itoa(year) + strconv.Itoa(month) + strconv.Itoa(day)
+	birthdayStr := DatePad(strconv.Itoa(year), "year") + DatePad(strconv.Itoa(month), "month") + DatePad(strconv.Itoa(day), "day")
 	_, error := time.Parse("20060102", birthdayStr)
 	if error != nil {
 		randYear := rand.Intn(nowYear-1950) + 1950
@@ -149,7 +147,7 @@ func GeneratorBirthdayCode(birthday string) string {
 		day, _ = strconv.Atoi(DatePad(strconv.Itoa(randDay), "day"))
 	}
 
-	return strconv.Itoa(year) + strconv.Itoa(month) + strconv.Itoa(day)
+	return DatePad(strconv.Itoa(year), "year") + DatePad(strconv.Itoa(month), "month") + DatePad(strconv.Itoa(day), "day")
 }
 
 // 生成顺序码
@@ -170,5 +168,13 @@ func DatePad(date string, category string) string {
 		padLength = 4
 	}
 
-	return fmt.Sprintf("%s%032s", date, "")[:padLength]
+	for i := 0; i < padLength; i++ {
+		length := len([]rune(date))
+		if length < padLength {
+			// date = fmt.Sprintf("%s%s", "0", date)
+			date = "0" + date
+		}
+	}
+
+	return date
 }

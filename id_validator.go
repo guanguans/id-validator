@@ -2,9 +2,8 @@ package id_validator
 
 import (
 	"errors"
-	"strconv"
-
 	"id-validator/data"
+	"strconv"
 )
 
 // 验证身份证号合法性
@@ -75,7 +74,7 @@ func FakeId(isEighteen bool, address string, birthday string, sex int) string {
 
 	// 出生日期码
 	birthdayCode := GeneratorBirthdayCode(birthday)
-
+	// fmt.Println(birthdayCode)
 	// 顺序码
 	orderCode := GeneratorOrderCode(sex)
 

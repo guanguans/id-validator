@@ -60,10 +60,8 @@ func GenerateLongType(id string) map[string]string {
 // 检查地址码
 func CheckAddressCode(addressCode string, birthdayCode string) bool {
 	addressInfo := GetAddressInfo(addressCode, birthdayCode)
-	if addressInfo["province"] == "" {
-		return false
-	}
-	return true
+
+	return addressInfo["province"] != ""
 }
 
 // 检查出生日期码
@@ -74,11 +72,8 @@ func CheckBirthdayCode(birthdayCode string) bool {
 	}
 
 	_, error := time.Parse("20060102", birthdayCode)
-	if error != nil {
-		return false
-	}
 
-	return true
+	return error == nil
 }
 
 // 检查顺序码
