@@ -97,7 +97,12 @@ func GetInfo(id string) (IdInfo, error) {
 }
 
 // 生成假身份证号码
-func Fake(isEighteen bool, address string, birthday string, sex int) string {
+func FakeId() string {
+	return FakeRequireId(true, "", "", 0)
+}
+
+// 按要求生成假身份证号码
+func FakeRequireId(isEighteen bool, address string, birthday string, sex int) string {
 	// 生成地址码
 	addressCode := GeneratorAddressCode(address)
 
@@ -108,7 +113,7 @@ func Fake(isEighteen bool, address string, birthday string, sex int) string {
 	orderCode := GeneratorOrderCode(sex)
 
 	if !isEighteen {
-		return addressCode + Substr(birthdayCode, 2, 6) + orderCode
+		return addressCode + Substr(birthdayCode, 2, 8) + orderCode
 	}
 
 	body := addressCode + birthdayCode + orderCode

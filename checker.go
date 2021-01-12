@@ -9,7 +9,7 @@ import (
 )
 
 // 检查ID参数
-func CheckIDArgument(id string) bool {
+func CheckIdArgument(id string) bool {
 	_, err := GenerateCode(id)
 
 	return err == nil
