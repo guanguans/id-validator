@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Init Go modules
-        run: go mod init guanguans/id-validator
+#      - name: Init Go modules
+#        run: go mod init guanguans/id-validator
       - name: Run golangci-lint
         uses: actions-contrib/golangci-lint@v1

@@ -2,7 +2,7 @@
 
 > 中国身份证号验证、获取身份证号信息、升级 15 位身份证号为 18 位、伪造符合校验的身份证号。
 
-![Tests](https://github.com/guanguans/id-validator/workflows/Tests/badge.svg)
+[![Tests](https://github.com/guanguans/id-validator/workflows/Tests/badge.svg)](https://github.com/guanguans/id-validator/actions)
 [![gocover.io](https://gocover.io/_badge/github.com/guanguans/id-validator)](https://gocover.io/github.com/guanguans/id-validator)
 [![Go Report Card](https://goreportcard.com/badge/github.com/guanguans/id-validator)](https://goreportcard.com/report/github.com/guanguans/id-validator)
 [![GoDoc](https://godoc.org/github.com/guanguans/id-validator?status.svg)](https://godoc.org/github.com/guanguans/id-validator)
