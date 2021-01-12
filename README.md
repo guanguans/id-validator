@@ -76,7 +76,7 @@ func main() {
 ## Testing
 
 ``` bash
-$ make ...
+$ go test
 ```
 
 ## Changelog
