@@ -122,7 +122,7 @@ func FakeRequireId(isEighteen bool, address string, birthday string, sex int) st
 }
 
 // 15位升级18位号码
-func Upgrade(id string) (string, error) {
+func UpgradeId(id string) (string, error) {
 	if !IsValid(id) {
 		return "", errors.New("Not Valid ID card number.")
 	}
