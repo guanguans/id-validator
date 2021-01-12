@@ -1,13 +1,13 @@
 # id-validator
 
-> **中华人民共和国居民身份证**、**中华人民共和国港澳居民居住证**以及**中华人民共和国台湾居民居住证**号码验证工具。
+> 中国身份证号验证、获取身份证号信息、升级 15 位身份证号为 18 位、伪造符合校验的身份证号。
 
 ![Tests](https://github.com/guanguans/id-validator/workflows/Tests/badge.svg)
-![Check & fix styling](https://github.com/guanguans/id-validator/workflows/Check%20&%20fix%20styling/badge.svg)
-[![codecov](https://codecov.io/gh/guanguans/id-validator/branch/main/graph/badge.svg?token=URGFAWS6S4)](https://codecov.io/gh/guanguans/id-validator)
-[![Latest Stable Version](https://poser.pugx.org/guanguans/id-validator/v)](//packagist.org/packages/guanguans/id-validator)
-[![Total Downloads](https://poser.pugx.org/guanguans/id-validator/downloads)](//packagist.org/packages/guanguans/id-validator)
-[![License](https://poser.pugx.org/guanguans/id-validator/license)](//packagist.org/packages/guanguans/id-validator)
+[![gocover.io](https://gocover.io/_badge/github.com/guanguans/id-validator)](https://gocover.io/github.com/guanguans/id-validator)
+[![Go Report Card](https://goreportcard.com/badge/github.com/guanguans/id-validator)](https://goreportcard.com/report/github.com/guanguans/id-validator)
+[![GoDoc](https://godoc.org/github.com/guanguans/id-validator?status.svg)](https://godoc.org/github.com/guanguans/id-validator)
+[![GitHub release](https://img.shields.io/github/release/guanguans/id-validator.svg)](https://github.com/guanguans/id-validator/releases)
+[![GitHub license](https://img.shields.io/github/license/guanguans/id-validator.svg)](https://github.com/guanguans/id-validator/blob/master/LICENSE)
 
 ## Requirement
 
@@ -20,6 +20,10 @@ $ go get -u github.com/guanguans/id-validator
 ```
 
 ## Usage
+
+This is just a quick introduction, view the [GoDoc](https://godoc.org/github.com/guanguans/id-validator) for details.
+
+Let's start with a trivial example:
 
 ``` go
 package main
