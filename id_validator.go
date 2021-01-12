@@ -19,7 +19,7 @@ type IdInfo struct {
 	ChineseZodiac string
 	Sex           int
 	Length        int
-	CheckBit      int
+	CheckBit      string
 }
 
 // 验证身份证号合法性
@@ -79,9 +79,6 @@ func GetInfo(id string) (IdInfo, error) {
 	// 长度
 	length, _ := strconv.Atoi(code["type"])
 
-	// Bit码
-	checkBit, _ := strconv.Atoi(code["checkBit"])
-
 	return IdInfo{
 		AddressCode:   addressCode,
 		Abandoned:     abandoned,
@@ -92,7 +89,7 @@ func GetInfo(id string) (IdInfo, error) {
 		ChineseZodiac: GetChineseZodiac(code["birthdayCode"]),
 		Sex:           sex,
 		Length:        length,
-		CheckBit:      checkBit,
+		CheckBit:      code["checkBit"],
 	}, nil
 }
 
@@ -102,6 +99,10 @@ func FakeId() string {
 }
 
 // 按要求生成假身份证号码
+// isEighteen 是否生成18位号码
+// address    省市县三级地区官方全称：如`北京市`、`台湾省`、`香港特别行政区`、`深圳市`、`黄浦区`
+// birthday   出生日期：如 `2000`、`198801`、`19990101`
+// sex        性别：1为男性，0为女性
 func FakeRequireId(isEighteen bool, address string, birthday string, sex int) string {
 	// 生成地址码
 	addressCode := GeneratorAddressCode(address)
