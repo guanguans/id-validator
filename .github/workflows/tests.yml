@@ -6,6 +6,7 @@ on:
   pull_request:
 env:
   GOPROXY: "https://proxy.golang.org"
+  GO111MODULE: "on"
 
 jobs:
   test:
@@ -24,7 +25,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Run unit tests
         run: |
-#          go mod init guanguans/id-validator
+          # go mod init guanguans/id-validator
           go test -v -race -coverprofile=coverage -covermode=atomic ./...
       - name: Upload coverage report to Codecov
         uses: codecov/codecov-action@v1.0.6
