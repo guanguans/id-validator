@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"time"
 
-	"id-validator/data"
+	"github.com/guanguans/id-validator/data"
 )
 
 // 身份证信息

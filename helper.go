@@ -1,7 +1,7 @@
 package idvalidator
 
 import (
-	"id-validator/data"
+	"github.com/guanguans/id-validator/data"
 	"strconv"
 	"strings"
 )
