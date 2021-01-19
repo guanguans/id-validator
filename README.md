@@ -29,9 +29,8 @@ Let's start with a trivial example:
 package main
 
 import (
-	"fmt"
-
 	idvalidator "github.com/guanguans/id-validator"
+	"gopkg.in/ffmt.v1"
 )
 
 func main() {
