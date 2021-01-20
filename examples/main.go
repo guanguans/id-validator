@@ -16,7 +16,7 @@ func main() {
 	ffmt.P(idvalidator.GetInfo("440308199901101512"))
 
 	// 生成可通过校验的假身份证号
-	ffmt.P(idvalidator.FakeId()) // 随机生成
+	ffmt.P(idvalidator.FakeId())                                // 随机生成
 	ffmt.P(idvalidator.FakeRequireId(true, "江苏省", "200001", 1)) // 生成出生于2000年1月江苏省的男性居民身份证
 
 	// 15位号码升级为18位
