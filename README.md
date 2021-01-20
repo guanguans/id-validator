@@ -1,29 +1,36 @@
 # id-validator
 
-> 中国身份证号验证、获取身份证号信息、升级 15 位身份证号为 18 位、伪造符合校验的身份证号。
+[简体中文](README.md) | [ENGLISH](README-ES.md)
+
+> 中国身份证号验证。
 
 [![Tests](https://github.com/guanguans/id-validator/workflows/Tests/badge.svg)](https://github.com/guanguans/id-validator/actions)
 [![gocover.io](https://gocover.io/_badge/github.com/guanguans/id-validator)](https://gocover.io/github.com/guanguans/id-validator)
 [![Go Report Card](https://goreportcard.com/badge/github.com/guanguans/id-validator)](https://goreportcard.com/report/github.com/guanguans/id-validator)
 [![GoDoc](https://godoc.org/github.com/guanguans/id-validator?status.svg)](https://godoc.org/github.com/guanguans/id-validator)
-[![GitHub release](https://img.shields.io/github/release/guanguans/id-validator.svg)](https://github.com/guanguans/id-validator/releases)
+[![GitHub release](https://img.shields.io/github/tag/guanguans/id-validator.svg)](https://github.com/guanguans/id-validator/releases)
 [![GitHub license](https://img.shields.io/github/license/guanguans/id-validator.svg)](https://github.com/guanguans/id-validator/blob/master/LICENSE)
 
-## Requirement
+## 功能
+
+* 中国身份证号验证
+* 获取身份证号信息
+* 升级 15 位身份证号为 18 位
+* 伪造符合校验的身份证号
+
+## 环境要求
 
 * Go >= 1.11
 
-## Installation
+## 安装
 
 ``` shell script
 $ go get -u github.com/guanguans/id-validator
 ```
 
-## Usage
+## 使用
 
-This is just a quick introduction, view the [GoDoc](https://godoc.org/github.com/guanguans/id-validator) for details.
-
-Let's start with a trivial example:
+这只是一个快速介绍, 请查看 [GoDoc](https://godoc.org/github.com/guanguans/id-validator) 获得详细信息。
 
 ``` go
 package main
@@ -76,35 +83,35 @@ func main() {
 }
 ```
 
-## Testing
+## 测试
 
 ``` bash
 $ go test
 ```
 
-## Changelog
+## 变更日志
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+请参阅 [CHANGELOG](CHANGELOG.md) 获取最近有关更改的更多信息。
 
-## Contributing
+## 贡献指南
 
-Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
+请参阅 [CONTRIBUTING](.github/CONTRIBUTING.md) 有关详细信息。
 
-## Security Vulnerabilities
+## 安全漏洞
 
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+请查看[我们的安全政策](../../security/policy)了解如何报告安全漏洞。
 
-## Credits
+## 贡献者
 
 * [guanguans](https://github.com/guanguans)
-* [All Contributors](../../contributors)
+* [所有贡献者](../../contributors)
 
 ## 相关项目
 
-* [PHP 版本](https://github.com/jxlwqq/id-validator)
-* [Python 版本](https://github.com/jxlwqq/id-validator.py)
-* [Ruby 版本](https://github.com/renyijiu/id_validator)
-* [JavaScript 版本](https://github.com/mc-zone/IDValidator)
+* [jxlwqq/id-validator](https://github.com/jxlwqq/id-validator)，jxlwqq
+* [jxlwqq/id-validator.py](https://github.com/jxlwqq/id-validator.py)，jxlwqq
+* [mc-zone/IDValidator](https://github.com/mc-zone/IDValidator)，mc-zone
+* [renyijiu/id_validator](https://github.com/renyijiu/id_validator)，renyijiu
 
 ## 参考资料
 
@@ -114,6 +121,6 @@ Please review [our security policy](../../security/policy) on how to report secu
 * [国务院办公厅关于印发《港澳台居民居住证申领发放办法》的通知](http://www.gov.cn/zhengce/content/2018-08/19/content_5314865.htm)
 * [港澳台居民居住证](https://zh.wikipedia.org/wiki/港澳台居民居住证)
 
-## License
+## 协议
 
-The MIT License (MIT). Please see [License File](LICENSE) for more information.
+MIT 许可证（MIT）。有关更多信息，请参见[协议文件](LICENSE)。
