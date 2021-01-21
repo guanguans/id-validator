@@ -1,6 +1,6 @@
 # id-validator
 
-[简体中文](README.md) | [ENGLISH](README-ES.md)
+[简体中文](README.md) | [ENGLISH](README-EN.md)
 
 > 中国身份证号验证。
 
