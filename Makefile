@@ -1,5 +1,6 @@
 # note: call scripts from /scripts
 GOCMD=GO111MODULE=on go
+LOCALCMD=/usr/local
 
 linters-install:
 	@golangci-lint --version >/dev/null 2>&1 || { \
@@ -8,12 +9,16 @@ linters-install:
 	}
 
 lint: linters-install
-	$(PWD)/bin/golangci-lint run
+	 $(LOCALCMD)/bin/golangci-lint run
+
+fmt:
+	$(GOCMD) fmt ./...
+
+vet:
+	$(GOCMD) vet ./.
 
 test:
 	$(GOCMD) test -cover -race ./...
 
 bench:
 	$(GOCMD) test -bench=. -benchmem ./...
-
-.PHONY: test lint linters-install
