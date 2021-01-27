@@ -9,7 +9,7 @@ import (
 )
 
 // 身份证信息
-type IdInfo struct {
+type idInfo struct {
 	AddressCode   int
 	Abandoned     int
 	Address       string
@@ -24,13 +24,13 @@ type IdInfo struct {
 
 // 验证身份证号合法性
 func IsValid(id string) bool {
-	code, err := GenerateCode(id)
+	code, err := generateCode(id)
 	if err != nil {
 		return false
 	}
 
 	// 检查顺序码、生日码、地址码
-	if !CheckOrderCode(code["order"]) || !CheckBirthdayCode(code["birthdayCode"]) || !CheckAddressCode(code["addressCode"], code["birthdayCode"]) {
+	if !checkOrderCode(code["order"]) || !checkBirthdayCode(code["birthdayCode"]) || !checkAddressCode(code["addressCode"], code["birthdayCode"]) {
 		return false
 	}
 
@@ -40,21 +40,21 @@ func IsValid(id string) bool {
 	}
 
 	// 校验码
-	return code["checkBit"] == GeneratorCheckBit(code["body"])
+	return code["checkBit"] == generatorCheckBit(code["body"])
 }
 
 // 获取身份证信息
-func GetInfo(id string) (IdInfo, error) {
+func GetInfo(id string) (idInfo, error) {
 	// 验证有效性
 	if !IsValid(id) {
-		return IdInfo{}, errors.New("Not Valid ID card number.")
+		return idInfo{}, errors.New("Not Valid ID card number.")
 	}
 
-	code, _ := GenerateCode(id)
+	code, _ := generateCode(id)
 	addressCode, _ := strconv.Atoi(code["addressCode"])
 
 	// 地址信息
-	addressInfo := GetAddressInfo(code["addressCode"], code["birthdayCode"])
+	addressInfo := getAddressInfo(code["addressCode"], code["birthdayCode"])
 	var addressTree []string
 	for _, val := range addressInfo {
 		addressTree = append(addressTree, val)
@@ -79,14 +79,14 @@ func GetInfo(id string) (IdInfo, error) {
 	// 长度
 	length, _ := strconv.Atoi(code["type"])
 
-	return IdInfo{
+	return idInfo{
 		AddressCode:   addressCode,
 		Abandoned:     abandoned,
 		Address:       addressInfo["province"] + addressInfo["city"] + addressInfo["district"],
 		AddressTree:   addressTree,
 		Birthday:      birthday,
-		Constellation: GetConstellation(code["birthdayCode"]),
-		ChineseZodiac: GetChineseZodiac(code["birthdayCode"]),
+		Constellation: getConstellation(code["birthdayCode"]),
+		ChineseZodiac: getChineseZodiac(code["birthdayCode"]),
 		Sex:           sex,
 		Length:        length,
 		CheckBit:      code["checkBit"],
@@ -105,21 +105,21 @@ func FakeId() string {
 // sex        性别：1为男性，0为女性
 func FakeRequireId(isEighteen bool, address string, birthday string, sex int) string {
 	// 生成地址码
-	addressCode := GeneratorAddressCode(address)
+	addressCode := generatorAddressCode(address)
 
 	// 出生日期码
-	birthdayCode := GeneratorBirthdayCode(birthday)
+	birthdayCode := generatorBirthdayCode(birthday)
 
 	// 生成顺序码
-	orderCode := GeneratorOrderCode(sex)
+	orderCode := generatorOrderCode(sex)
 
 	if !isEighteen {
-		return addressCode + Substr(birthdayCode, 2, 8) + orderCode
+		return addressCode + substr(birthdayCode, 2, 8) + orderCode
 	}
 
 	body := addressCode + birthdayCode + orderCode
 
-	return body + GeneratorCheckBit(body)
+	return body + generatorCheckBit(body)
 }
 
 // 15位升级18位号码
@@ -128,9 +128,9 @@ func UpgradeId(id string) (string, error) {
 		return "", errors.New("Not Valid ID card number.")
 	}
 
-	code, _ := GenerateShortCode(id)
+	code, _ := generateShortCode(id)
 
 	body := code["addressCode"] + code["birthdayCode"] + code["order"]
 
-	return body + GeneratorCheckBit(body), nil
+	return body + generatorCheckBit(body), nil
 }

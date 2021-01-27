@@ -9,28 +9,28 @@ import (
 )
 
 // 检查ID参数
-func CheckIdArgument(id string) bool {
-	_, err := GenerateCode(id)
+func checkIdArgument(id string) bool {
+	_, err := generateCode(id)
 
 	return err == nil
 }
 
 // 生成数据
-func GenerateCode(id string) (map[string]string, error) {
+func generateCode(id string) (map[string]string, error) {
 	length := len(id)
 	if length == 15 {
-		return GenerateShortCode(id)
+		return generateShortCode(id)
 	}
 
 	if length == 18 {
-		return GenerateLongCode(id)
+		return generateLongCode(id)
 	}
 
 	return map[string]string{}, errors.New("Invalid ID card number length.")
 }
 
 // 生成短数据
-func GenerateShortCode(id string) (map[string]string, error) {
+func generateShortCode(id string) (map[string]string, error) {
 	if len(id) != 15 {
 		return map[string]string{}, errors.New("Invalid ID card number length.")
 	}
@@ -49,7 +49,7 @@ func GenerateShortCode(id string) (map[string]string, error) {
 }
 
 // 生成长数据
-func GenerateLongCode(id string) (map[string]string, error) {
+func generateLongCode(id string) (map[string]string, error) {
 	if len(id) != 18 {
 		return map[string]string{}, errors.New("Invalid ID card number length.")
 	}
@@ -67,13 +67,13 @@ func GenerateLongCode(id string) (map[string]string, error) {
 }
 
 // 检查地址码
-func CheckAddressCode(addressCode string, birthdayCode string) bool {
-	return GetAddressInfo(addressCode, birthdayCode)["province"] != ""
+func checkAddressCode(addressCode string, birthdayCode string) bool {
+	return getAddressInfo(addressCode, birthdayCode)["province"] != ""
 }
 
 // 检查出生日期码
-func CheckBirthdayCode(birthdayCode string) bool {
-	year, _ := strconv.Atoi(Substr(birthdayCode, 0, 4))
+func checkBirthdayCode(birthdayCode string) bool {
+	year, _ := strconv.Atoi(substr(birthdayCode, 0, 4))
 	if year < 1800 {
 		return false
 	}
@@ -89,6 +89,6 @@ func CheckBirthdayCode(birthdayCode string) bool {
 }
 
 // 检查顺序码
-func CheckOrderCode(orderCode string) bool {
+func checkOrderCode(orderCode string) bool {
 	return len(orderCode) == 3
 }

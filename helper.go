@@ -6,8 +6,8 @@ import (
 	"strings"
 )
 
-// 检查地址码
-func GetAddressInfo(addressCode string, birthdayCode string) map[string]string {
+// 获取地址信息
+func getAddressInfo(addressCode string, birthdayCode string) map[string]string {
 	addressInfo := map[string]string{
 		"province": "",
 		"city":     "",
@@ -15,29 +15,29 @@ func GetAddressInfo(addressCode string, birthdayCode string) map[string]string {
 	}
 
 	// 省级信息
-	addressInfo["province"] = GetAddress(Substr(addressCode, 0, 2)+"0000", birthdayCode)
+	addressInfo["province"] = getAddress(substr(addressCode, 0, 2)+"0000", birthdayCode)
 
 	// 用于判断是否是港澳台居民居住证（8字开头）
-	firstCharacter := Substr(addressCode, 0, 1)
+	firstCharacter := substr(addressCode, 0, 1)
 	// 港澳台居民居住证无市级、县级信息
 	if firstCharacter == "8" {
 		return addressInfo
 	}
 
 	// 市级信息
-	addressInfo["city"] = GetAddress(Substr(addressCode, 0, 4)+"00", birthdayCode)
+	addressInfo["city"] = getAddress(substr(addressCode, 0, 4)+"00", birthdayCode)
 
 	// 县级信息
-	addressInfo["district"] = GetAddress(addressCode, birthdayCode)
+	addressInfo["district"] = getAddress(addressCode, birthdayCode)
 
 	return addressInfo
 }
 
 // 获取省市区地址码
-func GetAddress(addressCode string, birthdayCode string) string {
+func getAddress(addressCode string, birthdayCode string) string {
 	address := ""
 	addressCodeInt, _ := strconv.Atoi(addressCode)
-	year, _ := strconv.Atoi(Substr(birthdayCode, 0, 4))
+	year, _ := strconv.Atoi(substr(birthdayCode, 0, 4))
 	for key, val := range data.AddressCodeTimeline[addressCodeInt] {
 		// if len(val) == 0 {
 		// 	continue
@@ -52,9 +52,9 @@ func GetAddress(addressCode string, birthdayCode string) string {
 }
 
 // 获取星座信息
-func GetConstellation(birthdayCode string) string {
-	monthStr := Substr(birthdayCode, 4, 6)
-	dayStr := Substr(birthdayCode, 6, 8)
+func getConstellation(birthdayCode string) string {
+	monthStr := substr(birthdayCode, 4, 6)
+	dayStr := substr(birthdayCode, 6, 8)
 	month, _ := strconv.Atoi(monthStr)
 	day, _ := strconv.Atoi(dayStr)
 	startDate := data.Constellation[month]["start_date"]
@@ -72,17 +72,17 @@ func GetConstellation(birthdayCode string) string {
 }
 
 // 获取生肖信息
-func GetChineseZodiac(birthdayCode string) string {
+func getChineseZodiac(birthdayCode string) string {
 	// 子鼠
 	start := 1900
-	end, _ := strconv.Atoi(Substr(birthdayCode, 0, 4))
+	end, _ := strconv.Atoi(substr(birthdayCode, 0, 4))
 	key := (end - start) % 12
 
 	return data.ChineseZodiac[key]
 }
 
-// Substr 截取字符串
-func Substr(source string, start int, end int) string {
+// substr 截取字符串
+func substr(source string, start int, end int) string {
 	r := []rune(source)
 	length := len(r)
 
