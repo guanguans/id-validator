@@ -8,6 +8,7 @@ import (
 func main() {
 	// 验证身份证号合法性
 	ffmt.P(idvalidator.IsValid("440308199901101512")) // 大陆居民身份证18位
+	ffmt.P(idvalidator.IsValid("11010119900307803X")) // 大陆居民身份证末位是X18位
 	ffmt.P(idvalidator.IsValid("610104620927690"))    // 大陆居民身份证15位
 	ffmt.P(idvalidator.IsValid("810000199408230021")) // 港澳居民居住证18位
 	ffmt.P(idvalidator.IsValid("830000199201300022")) // 台湾居民居住证18位

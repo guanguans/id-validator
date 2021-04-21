@@ -31,7 +31,7 @@ func generatorCheckBit(body string) string {
 	// 生成校验码
 	checkBit := (12 - (bodySum % 11)) % 11
 	if checkBit == 10 {
-		return "X"
+		return "x"
 	}
 	return strconv.Itoa(checkBit)
 }
