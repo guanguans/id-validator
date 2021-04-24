@@ -1,0 +1,168 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * This file is part of the guanguans/id-validator.
+ *
+ * (c) guanguans <ityaozm@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
+// Self-called anonymous function that creates its own scope and keep the global namespace clean.
+(function (){
+    ini_set('display_errors', 'on');
+    ini_set('display_startup_errors', 'on');
+    ini_set('memory_limit', '1G');
+
+    error_reporting(E_ALL);
+
+    $convertData = new ConvertData();
+    $convertData->convertAddressCode();
+    $convertData->convertAddressCodeTimeline();
+})();
+
+class ConvertData
+{
+    /**
+     * 地址码 url
+     */
+    const addressCodeUrl = 'https://raw.githubusercontent.com/jxlwqq/id-validator/master/data/addressCode.php';
+
+    /**
+     * 地址码时间线 url
+     */
+    const addressCodeTimelineUrl = 'https://raw.githubusercontent.com/jxlwqq/id-validator/master/data/addressCodeTimeline.php';
+
+    /**
+     * @var string 地址码模板
+     */
+    protected $addressCodeTemplate = <<<"addressCodeTemplate"
+package data
+
+// 行政区划代码（地址码）
+// 中华人民共和国民政部权威数据
+// 注1：台湾省、香港特别行政区和澳门特别行政区暂缺地市和区县信息
+// 注2：每月发布的区划变更表是根据区划变更地的统计人员在统计信息系统更新后的情况所绘制，与区划变更文件发布的时间有一定的延迟性，但在每年的最后一次发布变更情况后与区划全年变更文件保持一致。
+// Data Source: http://www.mca.gov.cn/article/sj/xzqh/
+var AddressCode = map[int]string{
+%s
+}
+
+addressCodeTemplate;
+
+    /**
+     * @var string 地址码单项模板
+     */
+    protected $addressCodeItemTemplate = "\t%s: \"%s\",\n";
+
+    /**
+     * @var string 地址码时间线模板
+     */
+    protected $addressCodeTimelineTemplate = <<<"addressCodeTimelineTemplate"
+package data
+
+// 行政区划代码（地址码）更新时间线
+// 中华人民共和国民政部权威数据
+// 注1：台湾省、香港特别行政区和澳门特别行政区暂缺地市和区县信息
+// 注2：每月发布的区划变更表是根据区划变更地的统计人员在统计信息系统更新后的情况所绘制，与区划变更文件发布的时间有一定的延迟性，但在每年的最后一次发布变更情况后与区划全年变更文件保持一致。
+// Data Source: http://www.mca.gov.cn/article/sj/xzqh/
+var AddressCodeTimeline = map[int][]map[string]string{
+%s
+}
+
+addressCodeTimelineTemplate;
+
+    /**
+     * @var string 地址码时间线单项模板
+     */
+    protected $addressCodeTimelineItemTemplate = <<<"addressCodeTimelineItemTemplate"
+    %s: {
+%s
+    },\n
+addressCodeTimelineItemTemplate;
+
+    /**
+     * @var string 地址码时间线单项单元模板
+     */
+    protected $addressCodeTimelineCellTemplate = <<<"addressCodeTimelineItemTemplate"
+        {
+            "address":    "%s",
+            "start_year": "%s",
+            "end_year":   "%s",
+        },\n
+addressCodeTimelineItemTemplate;
+
+    /**
+     * ConvertData constructor.
+     *
+     * @param  array  $options
+     */
+    public function __construct(array $options = [])
+    {
+    }
+
+    /**
+     * 拉取远程文件到本地
+     *
+     * @param  string  $remoteUrl
+     * @param  null|string  $saveToPath
+     *
+     * @return string
+     */
+    protected function pullRemoteFileToLocal(string $remoteUrl, string $saveToPath = null)
+    {
+        $fileInfo = new SplFileInfo($remoteUrl);
+
+        ! $saveToPath && $saveToPath = sprintf("%s/%s", __DIR__, $fileInfo->getFileName());
+
+        file_put_contents(
+            $saveToPath,
+            file_get_contents($remoteUrl)
+        );
+
+        return $saveToPath;
+    }
+
+    /**
+     * 转换地址码
+     *
+     * @param  null|string  $url
+     *
+     * @return bool
+     */
+    public function convertAddressCode(string $url = null)
+    {
+        $addressCodes = require $this->pullRemoteFileToLocal($url ?? static::addressCodeUrl);
+
+        $items = "";
+        foreach ($addressCodes as $key => $addressCode) {
+            $items .= sprintf($this->addressCodeItemTemplate, $key, $addressCode);
+        }
+
+        return (bool)file_put_contents(__DIR__.'/address_code.go', sprintf($this->addressCodeTemplate, trim($items)));
+    }
+
+    /**
+     * 转换地址码时间线
+     *
+     * @param  null|string  $url
+     *
+     * @return bool
+     */
+    public function convertAddressCodeTimeline(string $url = null)
+    {
+        $addressCodeTimelines = require $this->pullRemoteFileToLocal($url ?? static::addressCodeTimelineUrl);;
+
+        $items = "";
+        foreach ($addressCodeTimelines as $key => $addressCodeTimeline) {
+            $cellTemplate = "";
+            foreach ($addressCodeTimeline as $cell) {
+                $cellTemplate .= sprintf($this->addressCodeTimelineCellTemplate, $cell['address'], $cell['start_year'], $cell['end_year']);
+            }
+            $items .= sprintf($this->addressCodeTimelineItemTemplate, $key, rtrim($cellTemplate));
+        }
+
+        return (bool)file_put_contents(__DIR__.'/address_code_timeline.go', sprintf($this->addressCodeTimelineTemplate, trim($items)));
+    }
+}

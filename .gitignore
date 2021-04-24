@@ -21,3 +21,4 @@
 .history/
 tests.go
 coverage.xml
+/scripts/address*
