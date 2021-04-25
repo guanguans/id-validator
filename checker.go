@@ -9,11 +9,11 @@ import (
 )
 
 // 检查ID参数
-func checkIdArgument(id string) bool {
-	_, err := generateCode(id)
-
-	return err == nil
-}
+// func checkIdArgument(id string) bool {
+// 	_, err := generateCode(id)
+//
+// 	return err == nil
+// }
 
 // 生成数据
 func generateCode(id string) (map[string]string, error) {

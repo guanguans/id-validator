@@ -17,7 +17,7 @@ func BenchmarkIsValid(b *testing.B) {
 	for _, bm := range benchmarks {
 		b.Run(bm.name, func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
-				IsValid(bm.name)
+				IsValid(bm.id)
 			}
 		})
 	}
@@ -36,7 +36,10 @@ func BenchmarkGetInfo(b *testing.B) {
 	for _, bm := range benchmarks {
 		b.Run(bm.name, func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
-				GetInfo(bm.name)
+				_, err := GetInfo(bm.id)
+				if err != nil {
+					b.Errorf("There’s been a mistake(%s):%s", bm.id, err.Error())
+				}
 			}
 		})
 	}
@@ -76,12 +79,15 @@ func BenchmarkUpgradeId(b *testing.B) {
 		id   string
 	}{
 		{id: "610104620927690"},
-		{id: "61010462092769"},
+		// {id: "61010462092769"},
 	}
 	for _, bm := range benchmarks {
 		b.Run(bm.name, func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
-				UpgradeId(bm.id)
+				_, err := UpgradeId(bm.id)
+				if err != nil {
+					b.Errorf("There’s been a mistake(%s):%s", bm.id, err.Error())
+				}
 			}
 		})
 	}
