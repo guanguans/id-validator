@@ -13696,7 +13696,7 @@ var AddressCodeTimeline = map[int][]map[string]string{
 		{
 			"address":    "崇川区",
 			"start_year": "1991",
-			"end_year":   "",
+			"end_year":   "2019",
 		},
 	},
 	320603: {
@@ -13715,13 +13715,27 @@ var AddressCodeTimeline = map[int][]map[string]string{
 		{
 			"address":    "港闸区",
 			"start_year": "1991",
-			"end_year":   "",
+			"end_year":   "2019",
 		},
 	},
 	320612: {
 		{
 			"address":    "通州区",
 			"start_year": "2009",
+			"end_year":   "",
+		},
+	},
+	320613: {
+		{
+			"address":    "崇川区",
+			"start_year": "2020",
+			"end_year":   "",
+		},
+	},
+	320614: {
+		{
+			"address":    "海门区",
+			"start_year": "2020",
 			"end_year":   "",
 		},
 	},
@@ -13792,7 +13806,7 @@ var AddressCodeTimeline = map[int][]map[string]string{
 		{
 			"address":    "海门市",
 			"start_year": "1995",
-			"end_year":   "",
+			"end_year":   "2019",
 		},
 	},
 	320685: {
@@ -17400,7 +17414,7 @@ var AddressCodeTimeline = map[int][]map[string]string{
 		{
 			"address":    "弋江区",
 			"start_year": "2005",
-			"end_year":   "",
+			"end_year":   "2019",
 		},
 	},
 	340204: {
@@ -17440,6 +17454,20 @@ var AddressCodeTimeline = map[int][]map[string]string{
 		{
 			"address":    "三山区",
 			"start_year": "2005",
+			"end_year":   "2019",
+		},
+	},
+	340209: {
+		{
+			"address":    "弋江区",
+			"start_year": "2020",
+			"end_year":   "",
+		},
+	},
+	340210: {
+		{
+			"address":    "湾沚区",
+			"start_year": "2020",
 			"end_year":   "",
 		},
 	},
@@ -17450,18 +17478,25 @@ var AddressCodeTimeline = map[int][]map[string]string{
 			"end_year":   "1989",
 		},
 	},
+	340212: {
+		{
+			"address":    "繁昌区",
+			"start_year": "2020",
+			"end_year":   "",
+		},
+	},
 	340221: {
 		{
 			"address":    "芜湖县",
 			"start_year": "",
-			"end_year":   "",
+			"end_year":   "2019",
 		},
 	},
 	340222: {
 		{
 			"address":    "繁昌县",
 			"start_year": "",
-			"end_year":   "",
+			"end_year":   "2019",
 		},
 	},
 	340223: {
@@ -23523,6 +23558,13 @@ var AddressCodeTimeline = map[int][]map[string]string{
 			"end_year":   "",
 		},
 	},
+	370614: {
+		{
+			"address":    "蓬莱区",
+			"start_year": "2020",
+			"end_year":   "",
+		},
+	},
 	370620: {
 		{
 			"address":    "威海市",
@@ -23611,7 +23653,7 @@ var AddressCodeTimeline = map[int][]map[string]string{
 		{
 			"address":    "长岛县",
 			"start_year": "1983",
-			"end_year":   "",
+			"end_year":   "2019",
 		},
 	},
 	370681: {
@@ -23639,7 +23681,7 @@ var AddressCodeTimeline = map[int][]map[string]string{
 		{
 			"address":    "蓬莱市",
 			"start_year": "1995",
-			"end_year":   "",
+			"end_year":   "2019",
 		},
 	},
 	370685: {
@@ -29136,7 +29178,7 @@ var AddressCodeTimeline = map[int][]map[string]string{
 		{
 			"address":    "监利县",
 			"start_year": "1994",
-			"end_year":   "",
+			"end_year":   "2019",
 		},
 	},
 	421024: {
@@ -29183,6 +29225,13 @@ var AddressCodeTimeline = map[int][]map[string]string{
 		{
 			"address":    "松滋市",
 			"start_year": "1995",
+			"end_year":   "",
+		},
+	},
+	421088: {
+		{
+			"address":    "监利市",
+			"start_year": "2020",
 			"end_year":   "",
 		},
 	},
@@ -42465,11 +42514,18 @@ var AddressCodeTimeline = map[int][]map[string]string{
 			"end_year":   "",
 		},
 	},
+	520204: {
+		{
+			"address":    "水城区",
+			"start_year": "2020",
+			"end_year":   "",
+		},
+	},
 	520221: {
 		{
 			"address":    "水城县",
 			"start_year": "1987",
-			"end_year":   "",
+			"end_year":   "2019",
 		},
 	},
 	520222: {
