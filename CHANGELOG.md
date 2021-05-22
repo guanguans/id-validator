@@ -19,3 +19,10 @@ All notable changes to `guanguans/id-validator` will be documented in this file
 
 * Update data to 202012.
 * Fix `generatorAddressCode` and `generatorBirthdayCode`.
+
+## 1.1.0 - 2021-05-23
+
+* Add strict mode.
+* Add additional address code timeline data.
+* Add additional address code timeline data convert script.
+
