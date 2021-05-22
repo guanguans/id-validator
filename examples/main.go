@@ -15,8 +15,8 @@ func main() {
 	ffmt.P(idvalidator.IsValid("830000199201300022", false)) // 台湾居民居住证18位
 
 	// 获取身份证号信息
-	ffmt.P(idvalidator.GetInfo("440308199901101512", false))
-	ffmt.P(idvalidator.GetInfo("440308199901101512", true))
+	ffmt.P(idvalidator.GetInfo("440308199901101512", false)) // 非严格模式获取身份证号信息
+	ffmt.P(idvalidator.GetInfo("440308199901101512", true))  // 严格模式获取身份证号信息
 
 	// 生成可通过校验的假身份证号
 	ffmt.P(idvalidator.FakeId())                                // 随机生成
