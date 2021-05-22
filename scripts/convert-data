@@ -20,6 +20,8 @@
     $convertData = new ConvertData();
     $convertData->convertAddressCode();
     $convertData->convertAddressCodeTimeline();
+
+    die("success".PHP_EOL);
 })();
 
 class ConvertData
