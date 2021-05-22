@@ -104,11 +104,21 @@ func FakeId() string {
 // birthday   出生日期：如 `2000`、`198801`、`19990101`
 // sex        性别：1为男性，0为女性
 func FakeRequireId(isEighteen bool, address string, birthday string, sex int) string {
+
 	// 生成地址码
-	addressCode := generatorAddressCode(address)
+	var addressCode string
+	if address == "" {
+		for i, s := range data.AddressCode {
+			addressCode = strconv.Itoa(i)
+			address = s
+			break
+		}
+	} else {
+		addressCode = generatorAddressCode(address)
+	}
 
 	// 出生日期码
-	birthdayCode := generatorBirthdayCode(birthday)
+	birthdayCode := generatorBirthdayCode(addressCode, address, birthday)
 
 	// 生成顺序码
 	orderCode := generatorOrderCode(sex)

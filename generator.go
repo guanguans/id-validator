@@ -1,13 +1,14 @@
 package idvalidator
 
 import (
-	"github.com/guanguans/id-validator/data"
 	"math"
 	"math/rand"
 	"regexp"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/guanguans/id-validator/data"
 )
 
 // 生成Bit码
@@ -109,15 +110,42 @@ func getRandAddressCode(pattern string) string {
 }
 
 // 生成出生日期码
-func generatorBirthdayCode(birthday string) string {
+func generatorBirthdayCode(addressCode string, address string, birthday string) string {
+	startYaer := "0001"
+	endYear := "9999"
 	year := datePipelineHandle(datePad(substr(birthday, 0, 4), "year"), "year")
 	month := datePipelineHandle(datePad(substr(birthday, 4, 6), "month"), "month")
 	day := datePipelineHandle(datePad(substr(birthday, 6, 8), "day"), "day")
 
+	addressCodeInt, _ := strconv.Atoi(addressCode)
+	if _, ok := data.AddressCodeTimeline[addressCodeInt]; ok {
+		timeLine := data.AddressCodeTimeline[addressCodeInt]
+		for _, val := range timeLine {
+			if val["address"] == address {
+				if val["start_year"] != "" {
+					startYaer = val["start_year"]
+				}
+				if val["end_year"] != "" {
+					endYear = val["end_year"]
+				}
+			}
+		}
+	}
+
+	yearInt, _ := strconv.Atoi(year)
+	startYaerInt, _ := strconv.Atoi(startYaer)
+	endYearInt, _ := strconv.Atoi(endYear)
+	if yearInt < startYaerInt {
+		year = startYaer
+	}
+	if yearInt > endYearInt {
+		year = endYear
+	}
+
 	birthday = year + month + day
-	_, error := time.Parse("20060102", birthday)
+	_, err := time.Parse("20060102", birthday)
 	// example: 195578
-	if error != nil {
+	if err != nil {
 		year = datePad(year, "year")
 		month = datePad(month, "month")
 		day = datePad(day, "day")

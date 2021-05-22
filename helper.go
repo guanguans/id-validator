@@ -1,9 +1,10 @@
 package idvalidator
 
 import (
-	"github.com/guanguans/id-validator/data"
 	"strconv"
 	"strings"
+
+	"github.com/guanguans/id-validator/data"
 )
 
 // 获取地址信息
@@ -38,12 +39,18 @@ func getAddress(addressCode string, birthdayCode string) string {
 	address := ""
 	addressCodeInt, _ := strconv.Atoi(addressCode)
 	year, _ := strconv.Atoi(substr(birthdayCode, 0, 4))
-	for key, val := range data.AddressCodeTimeline[addressCodeInt] {
-		// if len(val) == 0 {
-		// 	continue
-		// }
-		startYear, _ := strconv.Atoi(val["start_year"])
-		if (key == 0 && year < startYear) || year >= startYear {
+	startYear := "0001"
+	endYear := "9999"
+	for _, val := range data.AddressCodeTimeline[addressCodeInt] {
+		if val["start_year"] != "" {
+			startYear = val["start_year"]
+		}
+		if val["end_year"] != "" {
+			endYear = val["end_year"]
+		}
+		startYearInt, _ := strconv.Atoi(startYear)
+		endYearInt, _ := strconv.Atoi(endYear)
+		if year >= startYearInt && year <= endYearInt {
 			address = val["address"]
 		}
 	}
