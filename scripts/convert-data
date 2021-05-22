@@ -20,6 +20,7 @@
     $convertData = new ConvertData();
     $convertData->convertAddressCode();
     $convertData->convertAddressCodeTimeline();
+    $convertData->convertAdditionalAddressCodeTimeline();
 
     die("success".PHP_EOL);
 })();
@@ -35,6 +36,11 @@ class ConvertData
      * 地址码时间线 url
      */
     const addressCodeTimelineUrl = 'https://raw.githubusercontent.com/jxlwqq/id-validator/master/data/addressCodeTimeline.php';
+
+    /**
+     * 补充的地址码时间线 url
+     */
+    const additionalAddressCodeTimelineUrl = 'https://raw.githubusercontent.com/jxlwqq/id-validator/master/data/additionalAddressCodeTimeline.php';
 
     /**
      * @var string 地址码模板
@@ -70,6 +76,28 @@ package data
 // 注2：每月发布的区划变更表是根据区划变更地的统计人员在统计信息系统更新后的情况所绘制，与区划变更文件发布的时间有一定的延迟性，但在每年的最后一次发布变更情况后与区划全年变更文件保持一致。
 // Data Source: http://www.mca.gov.cn/article/sj/xzqh/
 var AddressCodeTimeline = map[int][]map[string]string{
+%s
+}
+
+addressCodeTimelineTemplate;
+
+    /**
+     * @var string 补充的地址码时间线模板
+     */
+    protected $additionalAddressCodeTimelineTemplate = <<<"addressCodeTimelineTemplate"
+package data
+
+// 行政区划代码（地址码）补充数据
+// Data Source:
+// https://zh.wikipedia.org/wiki 中华人民共和国行政区划代码_(1区)
+// https://zh.wikipedia.org/wiki 中华人民共和国行政区划代码_(2区)
+// https://zh.wikipedia.org/wiki 中华人民共和国行政区划代码_(3区)
+// https://zh.wikipedia.org/wiki 中华人民共和国行政区划代码_(4区)
+// https://zh.wikipedia.org/wiki 中华人民共和国行政区划代码_(5区)
+// https://zh.wikipedia.org/wiki 中华人民共和国行政区划代码_(6区)
+// https://zh.wikipedia.org/wiki 中华人民共和国行政区划代码_(7区)
+// https://zh.wikipedia.org/wiki 中华人民共和国行政区划代码_(8区)
+var AdditionalAddressCodeTimeline = map[int][]map[string]string{
 %s
 }
 
@@ -166,5 +194,28 @@ addressCodeTimelineItemTemplate;
         }
 
         return (bool)file_put_contents(__DIR__.'/address_code_timeline.go', sprintf($this->addressCodeTimelineTemplate, trim($items)));
+    }
+
+    /**
+     * 转换补充的地址码时间线
+     *
+     * @param  null|string  $url
+     *
+     * @return bool
+     */
+    public function convertAdditionalAddressCodeTimeline(string $url = null)
+    {
+        $addressCodeTimelines = require $this->pullRemoteFileToLocal($url ?? static::additionalAddressCodeTimelineUrl);;
+
+        $items = "";
+        foreach ($addressCodeTimelines as $key => $addressCodeTimeline) {
+            $cellTemplate = "";
+            foreach ($addressCodeTimeline as $cell) {
+                $cellTemplate .= sprintf($this->addressCodeTimelineCellTemplate, $cell['address'], $cell['start_year'], $cell['end_year']);
+            }
+            $items .= sprintf($this->addressCodeTimelineItemTemplate, $key, rtrim($cellTemplate));
+        }
+
+        return (bool)file_put_contents(__DIR__.'/additional_address_code_timeline.go', sprintf($this->additionalAddressCodeTimelineTemplate, trim($items)));
     }
 }
