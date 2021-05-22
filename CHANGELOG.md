@@ -14,3 +14,8 @@ All notable changes to `guanguans/id-validator` will be documented in this file
 ## 1.0.2 - 2021-04-21
 
 * Fix the ID number with X at the end verification.
+
+## 1.0.3 - 2021-05-22
+
+* Update data to 202012.
+* Fix `generatorAddressCode` and `generatorBirthdayCode`.
