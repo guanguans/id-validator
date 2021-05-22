@@ -15,7 +15,7 @@ func TestIsValid(t *testing.T) {
 		"830000199201300022",
 	}
 	for _, id := range ids {
-		if !IsValid(id) {
+		if !IsValid(id, false) {
 			t.Errorf("%s must be true.", id)
 		}
 	}
@@ -29,18 +29,18 @@ func TestIsValid(t *testing.T) {
 		"830000199201300023",
 	}
 	for _, id := range errIds {
-		if IsValid(id) {
+		if IsValid(id, true) {
 			t.Errorf("%s must be false.", id)
 		}
 	}
 }
 
 func TestGetInfo(t *testing.T) {
-	_, err := GetInfo("440308199901101512")
+	_, err := GetInfo("440308199901101512", false)
 	if err != nil {
 		t.Errorf("Errors must be nil.")
 	}
-	_, e := GetInfo("440308199901101513")
+	_, e := GetInfo("440308199901101513", true)
 	if e == nil {
 		t.Errorf("Errors must not be nil.")
 	}
@@ -63,7 +63,7 @@ func TestFakeId(t *testing.T) {
 	if len(id) != 18 {
 		t.Errorf("String length must be 18. : %s", id)
 	}
-	if !IsValid(id) {
+	if !IsValid(id, false) {
 		t.Errorf("%s must be true.", id)
 	}
 }
@@ -73,11 +73,11 @@ func TestFakeRequireId(t *testing.T) {
 	if len(id) != 15 {
 		t.Errorf("String length must be 15. : %s", id)
 	}
-	if !IsValid(id) {
+	if !IsValid(id, false) {
 		t.Errorf("%s must be true.", id)
 	}
 
-	info, _ := GetInfo(id)
+	info, _ := GetInfo(id, false)
 	if info.Sex != 0 {
 		t.Errorf("%s must be 0.", "0")
 	}

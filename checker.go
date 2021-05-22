@@ -67,8 +67,8 @@ func generateLongCode(id string) (map[string]string, error) {
 }
 
 // 检查地址码
-func checkAddressCode(addressCode string, birthdayCode string) bool {
-	return getAddressInfo(addressCode, birthdayCode)["province"] != ""
+func checkAddressCode(addressCode string, birthdayCode string, strict bool) bool {
+	return getAddressInfo(addressCode, birthdayCode, strict)["province"] != ""
 }
 
 // 检查出生日期码

@@ -17,7 +17,7 @@ func BenchmarkIsValid(b *testing.B) {
 	for _, bm := range benchmarks {
 		b.Run(bm.name, func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
-				IsValid(bm.id)
+				IsValid(bm.id, true)
 			}
 		})
 	}
@@ -36,7 +36,7 @@ func BenchmarkGetInfo(b *testing.B) {
 	for _, bm := range benchmarks {
 		b.Run(bm.name, func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
-				_, err := GetInfo(bm.id)
+				_, err := GetInfo(bm.id, true)
 				if err != nil {
 					b.Errorf("There’s been a mistake(%s):%s", bm.id, err.Error())
 				}

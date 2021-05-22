@@ -23,14 +23,14 @@ type idInfo struct {
 }
 
 // 验证身份证号合法性
-func IsValid(id string) bool {
+func IsValid(id string, strict bool) bool {
 	code, err := generateCode(id)
 	if err != nil {
 		return false
 	}
 
 	// 检查顺序码、生日码、地址码
-	if !checkOrderCode(code["order"]) || !checkBirthdayCode(code["birthdayCode"]) || !checkAddressCode(code["addressCode"], code["birthdayCode"]) {
+	if !checkOrderCode(code["order"]) || !checkBirthdayCode(code["birthdayCode"]) || !checkAddressCode(code["addressCode"], code["birthdayCode"], strict) {
 		return false
 	}
 
@@ -44,9 +44,9 @@ func IsValid(id string) bool {
 }
 
 // 获取身份证信息
-func GetInfo(id string) (idInfo, error) {
+func GetInfo(id string, strict bool) (idInfo, error) {
 	// 验证有效性
-	if !IsValid(id) {
+	if !IsValid(id, strict) {
 		return idInfo{}, errors.New("Not Valid ID card number.")
 	}
 
@@ -54,7 +54,7 @@ func GetInfo(id string) (idInfo, error) {
 	addressCode, _ := strconv.Atoi(code["addressCode"])
 
 	// 地址信息
-	addressInfo := getAddressInfo(code["addressCode"], code["birthdayCode"])
+	addressInfo := getAddressInfo(code["addressCode"], code["birthdayCode"], strict)
 	var addressTree []string
 	for _, val := range addressInfo {
 		addressTree = append(addressTree, val)
@@ -134,7 +134,7 @@ func FakeRequireId(isEighteen bool, address string, birthday string, sex int) st
 
 // 15位升级18位号码
 func UpgradeId(id string) (string, error) {
-	if !IsValid(id) {
+	if !IsValid(id, true) {
 		return "", errors.New("Not Valid ID card number.")
 	}
 
