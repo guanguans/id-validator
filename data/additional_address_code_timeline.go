@@ -1113,7 +1113,7 @@ var AdditionalAddressCodeTimeline = map[int][]map[string]string{
 	341123: {
 		{
 			"address":    "滁县",
-			"start_year": "未曾使用",
+			"start_year": "",
 			"end_year":   "",
 		},
 	},
@@ -1736,14 +1736,14 @@ var AdditionalAddressCodeTimeline = map[int][]map[string]string{
 	420522: {
 		{
 			"address":    "宜都县",
-			"start_year": "未曾使用",
+			"start_year": "",
 			"end_year":   "",
 		},
 	},
 	420524: {
 		{
 			"address":    "当阳县",
-			"start_year": "未曾使用",
+			"start_year": "",
 			"end_year":   "",
 		},
 	},
@@ -1806,21 +1806,21 @@ var AdditionalAddressCodeTimeline = map[int][]map[string]string{
 	421084: {
 		{
 			"address":    "天门市",
-			"start_year": "未曾使用",
+			"start_year": "",
 			"end_year":   "",
 		},
 	},
 	421085: {
 		{
 			"address":    "潜江市",
-			"start_year": "未曾使用",
+			"start_year": "",
 			"end_year":   "",
 		},
 	},
 	421086: {
 		{
 			"address":    "仙桃市",
-			"start_year": "未曾使用",
+			"start_year": "",
 			"end_year":   "",
 		},
 	},
@@ -2677,7 +2677,7 @@ var AdditionalAddressCodeTimeline = map[int][]map[string]string{
 	517001: {
 		{
 			"address":    "市辖区",
-			"start_year": "未曾使用",
+			"start_year": "",
 			"end_year":   "",
 		},
 	},
