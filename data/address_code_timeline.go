@@ -29238,77 +29238,77 @@ var AddressCodeTimeline = map[int][]map[string]string{
 	421100: {
 		{
 			"address":    "黄冈市",
-			"start_year": "1995",
+			"start_year": "",
 			"end_year":   "",
 		},
 	},
 	421102: {
 		{
 			"address":    "黄州区",
-			"start_year": "1995",
+			"start_year": "",
 			"end_year":   "",
 		},
 	},
 	421121: {
 		{
 			"address":    "团风县",
-			"start_year": "1995",
+			"start_year": "",
 			"end_year":   "",
 		},
 	},
 	421122: {
 		{
 			"address":    "红安县",
-			"start_year": "1995",
+			"start_year": "",
 			"end_year":   "",
 		},
 	},
 	421123: {
 		{
 			"address":    "罗田县",
-			"start_year": "1995",
+			"start_year": "",
 			"end_year":   "",
 		},
 	},
 	421124: {
 		{
 			"address":    "英山县",
-			"start_year": "1995",
+			"start_year": "",
 			"end_year":   "",
 		},
 	},
 	421125: {
 		{
 			"address":    "浠水县",
-			"start_year": "1995",
+			"start_year": "",
 			"end_year":   "",
 		},
 	},
 	421126: {
 		{
 			"address":    "蕲春县",
-			"start_year": "1995",
+			"start_year": "",
 			"end_year":   "",
 		},
 	},
 	421127: {
 		{
 			"address":    "黄梅县",
-			"start_year": "1995",
+			"start_year": "",
 			"end_year":   "",
 		},
 	},
 	421181: {
 		{
 			"address":    "麻城市",
-			"start_year": "1995",
+			"start_year": "",
 			"end_year":   "",
 		},
 	},
 	421182: {
 		{
 			"address":    "武穴市",
-			"start_year": "1995",
+			"start_year": "",
 			"end_year":   "",
 		},
 	},
