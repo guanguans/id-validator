@@ -80,13 +80,10 @@ func getAddress(addressCode string, birthdayCode string, strict bool) string {
 	}
 
 	if address == "" && !strict {
-		for _, val := range timeline {
-			// 由于较晚申请户口或身份证等原因，导致会出现地址码正式启用于2000年，但实际1999年出生的新生儿，由于晚了一年报户口，导致身份证上的出生年份早于地址码正式启用的年份
-			// 由于某些地区的地址码已经废弃，但是实际上在之后的几年依然在使用
-			// 这里就不做时间判断了
-			address = val["address"]
-			break
-		}
+		// 由于较晚申请户口或身份证等原因，导致会出现地址码正式启用于2000年，但实际1999年出生的新生儿，由于晚了一年报户口，导致身份证上的出生年份早于地址码正式启用的年份
+		// 由于某些地区的地址码已经废弃，但是实际上在之后的几年依然在使用
+		// 这里就不做时间判断了
+		address = timeline[0]["address"]
 	}
 
 	return address
