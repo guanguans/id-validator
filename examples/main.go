@@ -10,6 +10,7 @@ func main() {
 	ffmt.P(idvalidator.IsValid("440308199901101512", false)) // 非严格模式验证大陆居民身份证18位
 	ffmt.P(idvalidator.IsValid("440308199901101512", true))  // 严格模式验证大陆居民身份证18位
 	ffmt.P(idvalidator.IsValid("11010119900307803X", false)) // 大陆居民身份证末位是X18位
+	ffmt.P(idvalidator.IsValid("15030319O20807078X", false)) // 大陆居民身份证末位是X18位
 	ffmt.P(idvalidator.IsValid("610104620927690", false))    // 大陆居民身份证15位
 	ffmt.P(idvalidator.IsValid("810000199408230021", false)) // 港澳居民居住证18位
 	ffmt.P(idvalidator.IsValid("830000199201300022", false)) // 台湾居民居住证18位
