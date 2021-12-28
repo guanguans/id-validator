@@ -1,11 +1,14 @@
 package data
 
+import "encoding/json"
+
 // 行政区划代码（地址码）更新时间线
 // 中华人民共和国民政部权威数据
 // 注1：台湾省、香港特别行政区和澳门特别行政区暂缺地市和区县信息
 // 注2：每月发布的区划变更表是根据区划变更地的统计人员在统计信息系统更新后的情况所绘制，与区划变更文件发布的时间有一定的延迟性，但在每年的最后一次发布变更情况后与区划全年变更文件保持一致。
 // Data Source: http://www.mca.gov.cn/article/sj/xzqh/
-var AddressCodeTimeline = map[int][]map[string]string{
+var datajson = `
+{
 	110000: {
 		{
 			"address":    "北京市",
@@ -54926,5 +54929,12 @@ var AddressCodeTimeline = map[int][]map[string]string{
 			"start_year": "1986",
 			"end_year":   "",
 		},
-	},
+	}
+}
+`
+
+var AddressCodeTimeline = map[int][]map[string]string{}
+
+func init() {
+	json.Unmarshal([]byte(datajson), &AddressCodeTimeline)
 }
