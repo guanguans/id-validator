@@ -58,7 +58,7 @@ func main() {
 	//			string("深圳市")                                    // 市
 	//			string("盐田区")                                    // 区
 	//		]
-	// 		Birthday:      <1999-01-10 00:00:00 +0000 UTC>     // 出生日期
+	// 		Birthday:      <1999-01-10 00:00:00 +0800 CST>     // 出生日期
 	// 		Constellation: string("摩羯座")                     // 星座
 	// 		ChineseZodiac: string("卯兔")                       // 生肖
 	// 		Sex:           int(1)                              // 性别：1为男性，0为女性
