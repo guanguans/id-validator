@@ -1,3 +1,7 @@
+// This file is part of the guanguans/id-validator.
+// (c) guanguans <ityaozm@gmail.com>
+// This source file is subject to the MIT license that is bundled.
+
 package data
 
 // 行政区划代码（地址码）补充数据
