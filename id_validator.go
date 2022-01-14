@@ -12,7 +12,7 @@ import (
 	"github.com/guanguans/id-validator/data"
 )
 
-// 身份证信息
+// IdInfo 身份证信息
 type IdInfo struct {
 	AddressCode   int
 	Abandoned     int
@@ -26,7 +26,7 @@ type IdInfo struct {
 	CheckBit      string
 }
 
-// 验证身份证号合法性
+// IsValid 验证身份证号合法性
 func IsValid(id string, strict bool) bool {
 	code, err := generateCode(id)
 	if err != nil {
@@ -47,11 +47,11 @@ func IsValid(id string, strict bool) bool {
 	return code["checkBit"] == generatorCheckBit(code["body"])
 }
 
-// 获取身份证信息
+// GetInfo 获取身份证信息
 func GetInfo(id string, strict bool) (IdInfo, error) {
 	// 验证有效性
 	if !IsValid(id, strict) {
-		return IdInfo{}, errors.New("Not Valid ID card number.")
+		return IdInfo{}, errors.New("not Valid ID card number")
 	}
 
 	code, _ := generateCode(id)
@@ -59,7 +59,7 @@ func GetInfo(id string, strict bool) (IdInfo, error) {
 
 	// 地址信息
 	addressInfo := getAddressInfo(code["addressCode"], code["birthdayCode"], strict)
-	var addressTree []string
+	var addressTree []string //nolint:prealloc
 	for _, val := range addressInfo {
 		addressTree = append(addressTree, val)
 	}
@@ -98,12 +98,12 @@ func GetInfo(id string, strict bool) (IdInfo, error) {
 	}, nil
 }
 
-// 生成假身份证号码
+// FakeId 生成假身份证号码
 func FakeId() string {
 	return FakeRequireId(true, "", "", 0)
 }
 
-// 按要求生成假身份证号码
+// FakeRequireId 按要求生成假身份证号码
 // isEighteen 是否生成18位号码
 // address    省市县三级地区官方全称：如`北京市`、`台湾省`、`香港特别行政区`、`深圳市`、`黄浦区`
 // birthday   出生日期：如 `2000`、`198801`、`19990101`
@@ -137,10 +137,10 @@ func FakeRequireId(isEighteen bool, address string, birthday string, sex int) st
 	return body + generatorCheckBit(body)
 }
 
-// 15位升级18位号码
+// UpgradeId 15位升级18位号码
 func UpgradeId(id string) (string, error) {
 	if !IsValid(id, true) {
-		return "", errors.New("Not Valid ID card number.")
+		return "", errors.New("not Valid ID card number")
 	}
 
 	code, _ := generateShortCode(id)
