@@ -9,7 +9,7 @@ import (
 )
 
 // 身份证信息
-type idInfo struct {
+type IdInfo struct {
 	AddressCode   int
 	Abandoned     int
 	Address       string
@@ -44,10 +44,10 @@ func IsValid(id string, strict bool) bool {
 }
 
 // 获取身份证信息
-func GetInfo(id string, strict bool) (idInfo, error) {
+func GetInfo(id string, strict bool) (IdInfo, error) {
 	// 验证有效性
 	if !IsValid(id, strict) {
-		return idInfo{}, errors.New("Not Valid ID card number.")
+		return IdInfo{}, errors.New("Not Valid ID card number.")
 	}
 
 	code, _ := generateCode(id)
@@ -80,7 +80,7 @@ func GetInfo(id string, strict bool) (idInfo, error) {
 	// 长度
 	length, _ := strconv.Atoi(code["type"])
 
-	return idInfo{
+	return IdInfo{
 		AddressCode:   addressCode,
 		Abandoned:     abandoned,
 		Address:       addressInfo["province"] + addressInfo["city"] + addressInfo["district"],
