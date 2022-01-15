@@ -4,7 +4,7 @@
 
 package data
 
-// 行政区划代码（地址码）补充数据
+// AdditionalAddressCodeTimeline 行政区划代码（地址码）补充数据
 // Data Source:
 // https://zh.wikipedia.org/wiki 中华人民共和国行政区划代码_(1区)
 // https://zh.wikipedia.org/wiki 中华人民共和国行政区划代码_(2区)

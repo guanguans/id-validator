@@ -4,7 +4,7 @@
 
 package data
 
-// 星座信息
+// Constellation 星座信息
 var Constellation = [13]map[string]string{
 	1: {
 		"name":       "水瓶座",

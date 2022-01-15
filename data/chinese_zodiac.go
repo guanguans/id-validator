@@ -4,7 +4,7 @@
 
 package data
 
-// 生肖信息
+// ChineseZodiac 生肖信息
 var ChineseZodiac = [12]string{
 	"子鼠",
 	"丑牛",
