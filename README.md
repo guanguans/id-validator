@@ -24,7 +24,7 @@
 
 ## 安装
 
-``` shell script
+```shell script
 $ go get -u github.com/guanguans/id-validator
 ```
 
@@ -32,7 +32,7 @@ $ go get -u github.com/guanguans/id-validator
 
 这只是一个快速介绍, 请查看 [GoDoc](https://godoc.org/github.com/guanguans/id-validator) 获得详细信息。
 
-``` go
+```go
 package main
 
 import (
@@ -41,7 +41,6 @@ import (
 )
 
 func main() {
-
 	// 验证身份证号合法性
 	ffmt.P(idvalidator.IsValid("440308199901101512", false)) // 非严格模式验证大陆居民身份证18位
 	ffmt.P(idvalidator.IsValid("440308199901101512", true))  // 严格模式验证大陆居民身份证18位
@@ -88,7 +87,7 @@ func main() {
 
 ## 测试
 
-``` bash
+```shell script
 $ make test
 ```
 
