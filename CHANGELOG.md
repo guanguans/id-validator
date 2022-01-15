@@ -2,44 +2,52 @@
 
 All notable changes to `guanguans/id-validator` will be documented in this file
 
+## v1.1.4 - 2022-01-14
+
+## What's Changed
+
+- Bump actions/setup-go from 2.1.4 to 2.1.5 by @dependabot in https://github.com/guanguans/id-validator/pull/11
+
+**Full Changelog**: https://github.com/guanguans/id-validator/compare/v1.1.3...v1.1.4
+
 ## 1.1.3 - 2021-12-06
 
-* Fix style.
-* Add github config files.
-* Bump actions/cache from 2.1.6 to 2.1.7.
+- Fix style.
+- Add github config files.
+- Bump actions/cache from 2.1.6 to 2.1.7.
 
 ## 1.1.2 - 2021-09-27
 
-* Bump codecov/codecov-action from 1.0.6 to 2.1.0.
-* Bump actions/cache from 1 to 2.1.6.
-* Bump actions/setup-go from 1 to 2.1.4. 
-* Add dependabot config file.
-* Update address_code_timeline.go.
+- Bump codecov/codecov-action from 1.0.6 to 2.1.0.
+- Bump actions/cache from 1 to 2.1.6.
+- Bump actions/setup-go from 1 to 2.1.4.
+- Add dependabot config file.
+- Update address_code_timeline.go.
 
 ## 1.1.1 - 2021-08-30
 
-* Update github action config files.
+- Update github action config files.
 
 ## 1.1.0 - 2021-05-23
 
-* Add strict mode.
-* Add additional address code timeline data.
-* Add additional address code timeline data convert script.
+- Add strict mode.
+- Add additional address code timeline data.
+- Add additional address code timeline data convert script.
 
 ## 1.0.3 - 2021-05-22
 
-* Update data to 202012.
-* Fix `generatorAddressCode` and `generatorBirthdayCode`.
+- Update data to 202012.
+- Fix `generatorAddressCode` and `generatorBirthdayCode`.
 
 ## 1.0.2 - 2021-04-21
 
-* Fix the ID number with X at the end verification.
+- Fix the ID number with X at the end verification.
 
 ## 1.0.1 - 2021-01-27
 
-* Change the access control of some functions.
-* Add bench testing.
+- Change the access control of some functions.
+- Add bench testing.
 
 ## 1.0.0 - 2021-01-21
 
-* Initial release.
+- Initial release.
