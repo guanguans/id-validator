@@ -30,11 +30,11 @@ func TestFeature(t *testing.T) {
 		t.Errorf("`err2` must be nil.")
 	}
 
-	upgradedId, err3 := UpgradeId("610104620927690")
+	upgradedID, err3 := UpgradeId("610104620927690")
 	if err3 != nil {
 		t.Errorf("`err3` must be nil.")
 	}
-	if len(upgradedId) != 18 {
-		t.Errorf("`upgradedId`  length must be 18.:%d", len(upgradedId))
+	if len(upgradedID) != 18 {
+		t.Errorf("`upgradedId`  length must be 18.:%d", len(upgradedID))
 	}
 }

@@ -30,13 +30,13 @@ func generateCode(id string) (map[string]string, error) {
 		return generateLongCode(id)
 	}
 
-	return map[string]string{}, errors.New("Invalid ID card number length.")
+	return map[string]string{}, errors.New("invalid ID card number length")
 }
 
 // 生成短数据
 func generateShortCode(id string) (map[string]string, error) {
 	if len(id) != 15 {
-		return map[string]string{}, errors.New("Invalid ID card number length.")
+		return map[string]string{}, errors.New("invalid ID card number length")
 	}
 
 	mustCompile := regexp.MustCompile("(.{6})(.{6})(.{3})")
@@ -55,7 +55,7 @@ func generateShortCode(id string) (map[string]string, error) {
 // 生成长数据
 func generateLongCode(id string) (map[string]string, error) {
 	if len(id) != 18 {
-		return map[string]string{}, errors.New("Invalid ID card number length.")
+		return map[string]string{}, errors.New("invalid ID card number length")
 	}
 	mustCompile := regexp.MustCompile("((.{6})(.{8})(.{3}))(.)")
 	subMatch := mustCompile.FindStringSubmatch(strings.ToLower(id))
