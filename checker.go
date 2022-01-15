@@ -7,17 +7,18 @@ package idvalidator
 import (
 	"errors"
 	"regexp"
-	"strconv"
 	"strings"
 	"time"
+
+	"github.com/spf13/cast"
 )
 
 // 检查ID参数
-// func checkIdArgument(id string) bool {
-// 	_, err := generateCode(id)
-//
-// 	return err == nil
-// }
+func checkIDArgument(id string) bool {
+	_, err := generateCode(id)
+
+	return err == nil
+}
 
 // 生成数据
 func generateCode(id string) (map[string]string, error) {
@@ -77,13 +78,12 @@ func checkAddressCode(addressCode string, birthdayCode string, strict bool) bool
 
 // 检查出生日期码
 func checkBirthdayCode(birthdayCode string) bool {
-	year, _ := strconv.Atoi(substr(birthdayCode, 0, 4))
+	year := cast.ToInt(substr(birthdayCode, 0, 4))
 	if year < 1800 {
 		return false
 	}
 
-	nowYear := time.Now().Year()
-	if year > nowYear {
+	if year > time.Now().Year() {
 		return false
 	}
 

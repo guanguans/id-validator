@@ -8,11 +8,11 @@ import (
 	"math"
 	"math/rand"
 	"regexp"
-	"strconv"
 	"strings"
 	"time"
 
 	"github.com/guanguans/id-validator/data"
+	"github.com/spf13/cast"
 )
 
 // 生成Bit码
@@ -29,8 +29,7 @@ func generatorCheckBit(body string) string {
 	bodyArray := strings.Split(body, "")
 	count := len(bodyArray)
 	for i := 0; i < count; i++ {
-		bodySub, _ := strconv.Atoi(bodyArray[i])
-		bodySum += bodySub * int(posWeight[18-i])
+		bodySum += cast.ToInt(bodyArray[i]) * int(posWeight[18-i])
 	}
 
 	// 生成校验码
@@ -38,7 +37,7 @@ func generatorCheckBit(body string) string {
 	if checkBit == 10 {
 		return "x"
 	}
-	return strconv.Itoa(checkBit)
+	return cast.ToString(checkBit)
 }
 
 // 生成地址码
@@ -46,7 +45,7 @@ func generatorAddressCode(address string) string {
 	addressCode := ""
 	for code, addressStr := range data.AddressCode {
 		if address == addressStr {
-			addressCode = strconv.Itoa(code)
+			addressCode = cast.ToString(code)
 			break
 		}
 	}
@@ -54,17 +53,12 @@ func generatorAddressCode(address string) string {
 	classification := addressCodeClassification(addressCode)
 	switch classification {
 	case "country":
-		// addressCode = getRandAddressCode("\\d{4}(?!00)[0-9]{2}$")
 		addressCode = getRandAddressCode("\\d{4}(?)[0-9]{2}$")
 	case "province":
-		provinceCode := substr(addressCode, 0, 2)
-		// pattern := "^" + provinceCode + "\\d{2}(?!00)[0-9]{2}$"
-		pattern := "^" + provinceCode + "\\d{2}(?)[0-9]{2}$"
+		pattern := "^" + substr(addressCode, 0, 2) + "\\d{2}(?)[0-9]{2}$"
 		addressCode = getRandAddressCode(pattern)
 	case "city":
-		cityCode := substr(addressCode, 0, 4)
-		// pattern := "^" + cityCode + "(?!00)[0-9]{2}$"
-		pattern := "^" + cityCode + "(?)[0-9]{2}$"
+		pattern := "^" + substr(addressCode, 0, 4) + "(?)[0-9]{2}$"
 		addressCode = getRandAddressCode(pattern)
 	}
 
@@ -102,7 +96,7 @@ func getRandAddressCode(pattern string) string {
 	mustCompile := regexp.MustCompile(pattern)
 	var keys []string
 	for key := range data.AddressCode {
-		keyStr := strconv.Itoa(key)
+		keyStr := cast.ToString(key)
 		if mustCompile.MatchString(keyStr) && substr(keyStr, 4, 6) != "00" {
 			keys = append(keys, keyStr)
 		}
@@ -121,7 +115,7 @@ func generatorBirthdayCode(addressCode string, address string, birthday string) 
 	month := datePipelineHandle(datePad(substr(birthday, 4, 6), "month"), "month")
 	day := datePipelineHandle(datePad(substr(birthday, 6, 8), "day"), "day")
 
-	addressCodeInt, _ := strconv.Atoi(addressCode)
+	addressCodeInt := cast.ToInt(addressCode)
 	if _, ok := data.AddressCodeTimeline[addressCodeInt]; ok {
 		timeLine := data.AddressCodeTimeline[addressCodeInt]
 		for _, val := range timeLine {
@@ -136,13 +130,11 @@ func generatorBirthdayCode(addressCode string, address string, birthday string) 
 		}
 	}
 
-	yearInt, _ := strconv.Atoi(year)
-	startYearInt, _ := strconv.Atoi(startYear)
-	endYearInt, _ := strconv.Atoi(endYear)
-	if yearInt < startYearInt {
+	yearInt := cast.ToInt(year)
+	if yearInt < cast.ToInt(startYear) {
 		year = startYear
 	}
-	if yearInt > endYearInt {
+	if yearInt > cast.ToInt(endYear) {
 		year = endYear
 	}
 
@@ -160,7 +152,7 @@ func generatorBirthdayCode(addressCode string, address string, birthday string) 
 
 // 日期处理
 func datePipelineHandle(date string, category string) string {
-	dateInt, _ := strconv.Atoi(date)
+	dateInt := cast.ToInt(date)
 
 	switch category {
 	case "year":
@@ -168,18 +160,18 @@ func datePipelineHandle(date string, category string) string {
 		rand.Seed(time.Now().Unix())
 		if dateInt < 1800 || dateInt > nowYear {
 			randDate := rand.Intn(nowYear-1950) + 1950
-			date = strconv.Itoa(randDate)
+			date = cast.ToString(randDate)
 		}
 	case "month":
 		if dateInt < 1 || dateInt > 12 {
 			randDate := rand.Intn(12-1) + 1
-			date = strconv.Itoa(randDate)
+			date = cast.ToString(randDate)
 		}
 
 	case "day":
 		if dateInt < 1 || dateInt > 31 {
 			randDate := rand.Intn(28-1) + 1
-			date = strconv.Itoa(randDate)
+			date = cast.ToString(randDate)
 		}
 	}
 
@@ -194,7 +186,7 @@ func generatorOrderCode(sex int) string {
 		orderCode--
 	}
 
-	return strconv.Itoa(orderCode)
+	return cast.ToString(orderCode)
 }
 
 // 日期补全

@@ -6,10 +6,10 @@ package idvalidator
 
 import (
 	"errors"
-	"strconv"
 	"time"
 
 	"github.com/guanguans/id-validator/data"
+	"github.com/spf13/cast"
 )
 
 // IdInfo 身份证信息
@@ -51,11 +51,11 @@ func IsValid(id string, strict bool) bool {
 func GetInfo(id string, strict bool) (IdInfo, error) {
 	// 验证有效性
 	if !IsValid(id, strict) {
-		return IdInfo{}, errors.New("not Valid ID card number")
+		return IdInfo{}, errors.New("invalid ID card number")
 	}
 
 	code, _ := generateCode(id)
-	addressCode, _ := strconv.Atoi(code["addressCode"])
+	addressCode := cast.ToInt(code["addressCode"])
 
 	// 地址信息
 	addressInfo := getAddressInfo(code["addressCode"], code["birthdayCode"], strict)
@@ -76,13 +76,12 @@ func GetInfo(id string, strict bool) (IdInfo, error) {
 
 	// 性别
 	sex := 1
-	sexCode, _ := strconv.Atoi(code["order"])
-	if (sexCode % 2) == 0 {
+	if (cast.ToInt(code["order"]) % 2) == 0 {
 		sex = 0
 	}
 
 	// 长度
-	length, _ := strconv.Atoi(code["type"])
+	length := cast.ToInt(code["type"])
 
 	return IdInfo{
 		AddressCode:   addressCode,
@@ -114,7 +113,7 @@ func FakeRequireId(isEighteen bool, address string, birthday string, sex int) st
 	var addressCode string
 	if address == "" {
 		for i, s := range data.AddressCode {
-			addressCode = strconv.Itoa(i)
+			addressCode = cast.ToString(i)
 			address = s
 			break
 		}
@@ -140,7 +139,7 @@ func FakeRequireId(isEighteen bool, address string, birthday string, sex int) st
 // UpgradeId 15位升级18位号码
 func UpgradeId(id string) (string, error) {
 	if !IsValid(id, true) {
-		return "", errors.New("not Valid ID card number")
+		return "", errors.New("invalid ID card number")
 	}
 
 	code, _ := generateShortCode(id)

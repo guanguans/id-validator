@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/guanguans/id-validator/data"
+	"github.com/spf13/cast"
 )
 
 // 获取地址信息
@@ -41,7 +42,7 @@ func getAddressInfo(addressCode string, birthdayCode string, strict bool) map[st
 // 获取省市区地址码
 func getAddress(addressCode string, birthdayCode string, strict bool) string {
 	address := ""
-	addressCodeInt, _ := strconv.Atoi(addressCode)
+	addressCodeInt := cast.ToInt(addressCode)
 	if _, ok := data.AddressCodeTimeline[addressCodeInt]; !ok {
 		// 修复 \d\d\d\d01、\d\d\d\d02、\d\d\d\d11 和 \d\d\d\d20 的历史遗留问题
 		// 以上四种地址码，现实身份证真实存在，但民政部历年公布的官方地址码中可能没有查询到
@@ -66,7 +67,7 @@ func getAddress(addressCode string, birthdayCode string, strict bool) string {
 	}
 
 	timeline := data.AddressCodeTimeline[addressCodeInt]
-	year, _ := strconv.Atoi(substr(birthdayCode, 0, 4))
+	year := cast.ToInt(substr(birthdayCode, 0, 4))
 	startYear := "0001"
 	endYear := "9999"
 	for _, val := range timeline {
@@ -76,9 +77,7 @@ func getAddress(addressCode string, birthdayCode string, strict bool) string {
 		if val["end_year"] != "" {
 			endYear = val["end_year"]
 		}
-		startYearInt, _ := strconv.Atoi(startYear)
-		endYearInt, _ := strconv.Atoi(endYear)
-		if year >= startYearInt && year <= endYearInt {
+		if year >= cast.ToInt(startYear) && year <= cast.ToInt(endYear) {
 			address = val["address"]
 		}
 	}
@@ -95,10 +94,8 @@ func getAddress(addressCode string, birthdayCode string, strict bool) string {
 
 // 获取星座信息
 func getConstellation(birthdayCode string) string {
-	monthStr := substr(birthdayCode, 4, 6)
-	dayStr := substr(birthdayCode, 6, 8)
-	month, _ := strconv.Atoi(monthStr)
-	day, _ := strconv.Atoi(dayStr)
+	month, _ := strconv.Atoi(substr(birthdayCode, 4, 6))
+	day, _ := strconv.Atoi(substr(birthdayCode, 6, 8))
 	startDate := data.Constellation[month]["start_date"]
 	startDay, _ := strconv.Atoi(strings.Split(startDate, "-")[1])
 	if day >= startDay {
@@ -117,7 +114,7 @@ func getConstellation(birthdayCode string) string {
 func getChineseZodiac(birthdayCode string) string {
 	// 子鼠
 	start := 1900
-	end, _ := strconv.Atoi(substr(birthdayCode, 0, 4))
+	end := cast.ToInt(substr(birthdayCode, 0, 4))
 	key := (end - start) % 12
 
 	return data.ChineseZodiac[key]
