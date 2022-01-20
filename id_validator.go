@@ -59,10 +59,7 @@ func GetInfo(id string, strict bool) (IdInfo, error) {
 
 	// 地址信息
 	addressInfo := getAddressInfo(code["addressCode"], code["birthdayCode"], strict)
-	var addressTree []string //nolint:prealloc
-	for _, val := range addressInfo {
-		addressTree = append(addressTree, val)
-	}
+	addressTree := []string{addressInfo["province"], addressInfo["city"], addressInfo["district"]}
 
 	// 是否废弃
 	var abandoned int
