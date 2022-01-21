@@ -2,6 +2,18 @@
 
 All notable changes to `guanguans/id-validator` will be documented in this file
 
+## v1.1.6 - 2022-01-21
+
+## What's Changed
+
+- fix: addressTree's sequence is random by @117503445 in https://github.com/guanguans/id-validator/pull/13
+
+## New Contributors
+
+- @117503445 made their first contribution in https://github.com/guanguans/id-validator/pull/13
+
+**Full Changelog**: https://github.com/guanguans/id-validator/compare/v1.1.5...v1.1.6
+
 ## v1.1.5 - 2022-01-15
 
 **Full Changelog**: https://github.com/guanguans/id-validator/compare/v1.1.4...v1.1.5
