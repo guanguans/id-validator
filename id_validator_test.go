@@ -40,49 +40,60 @@ func TestIsValid(t *testing.T) {
 }
 
 func TestGetInfo(t *testing.T) {
-	_, err := GetInfo("500154199301135886", false)
-	if err != nil {
-		t.Errorf("Errors must be nil.")
+	_, e1 := GetInfo("500154199301135886", false)
+	if e1 != nil {
+		t.Errorf("`e1` must be nil.")
 	}
-	_, e := GetInfo("440308199901101513", true)
-	if e == nil {
-		t.Errorf("Errors must not be nil.")
+
+	_, e2 := GetInfo("500154199301135886", true)
+	if e2 == nil {
+		t.Errorf("`e2` must not be nil.")
 	}
 }
 
 func TestUpgradeId(t *testing.T) {
-	_, err := UpgradeId("610104620927690")
-	if err != nil {
-		t.Errorf("Errors must be nil.")
+	_, e1 := UpgradeId("610104620927690")
+	if e1 != nil {
+		t.Errorf("`e1` must be nil.")
 	}
 
-	_, e := UpgradeId("61010462092769")
-	if e == nil {
-		t.Errorf("Errors must not be nil.")
+	_, e2 := UpgradeId("61010462092769")
+	if e2 == nil {
+		t.Errorf("`e2` must not be nil.")
 	}
 }
 
 func TestFakeId(t *testing.T) {
 	id := FakeId()
+	if !IsValid(id, false) {
+		t.Errorf("%s must be valid.", id)
+	}
 	if len(id) != 18 {
 		t.Errorf("String length must be 18. : %s", id)
-	}
-	if !IsValid(id, false) {
-		t.Errorf("%s must be true.", id)
 	}
 }
 
 func TestFakeRequireId(t *testing.T) {
-	id := FakeRequireId(false, "", "", 0)
+	id := FakeRequireId(false, "江苏省", "1995", 0)
+
+	if !IsValid(id, false) {
+		t.Errorf("%s must be valid.", id)
+	}
+
 	if len(id) != 15 {
 		t.Errorf("String length must be 15. : %s", id)
-	}
-	if !IsValid(id, false) {
-		t.Errorf("%s must be true.", id)
 	}
 
 	info, _ := GetInfo(id, false)
 	if info.Sex != 0 {
-		t.Errorf("%s must be 0.", "0")
+		t.Errorf("`Sex` must be 0.")
+	}
+
+	if info.AddressTree[0] != "江苏省" {
+		t.Errorf("`province` must be `江苏省`.")
+	}
+
+	if info.Birthday.Format("2006") != "1995" {
+		t.Errorf("Year of birth must be `1995`.")
 	}
 }
