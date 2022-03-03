@@ -15,17 +15,17 @@ func TestFeature(t *testing.T) {
 		t.Errorf("`isValid1` must be true.")
 	}
 
-	isValid2 := IsValid(FakeRequireId(true, "江苏省", "200001", 1), true)
+	isValid2 := IsValid(FakeRequireId(true, "江苏省", "200001", 1), false)
 	if !isValid2 {
 		t.Errorf("`isValid2` must be true.")
 	}
 
-	_, err1 := GetInfo(FakeRequireId(true, "江苏省", "200001", 1), true)
+	_, err1 := GetInfo(FakeId(), false)
 	if err1 != nil {
 		t.Errorf("`err1` must be nil.")
 	}
 
-	_, err2 := GetInfo(FakeRequireId(true, "江苏省", "200001", 1), true)
+	_, err2 := GetInfo(FakeRequireId(true, "江苏省", "200001", 1), false)
 	if err2 != nil {
 		t.Errorf("`err2` must be nil.")
 	}

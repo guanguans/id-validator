@@ -135,3 +135,12 @@ func substr(source string, start int, end int) string {
 
 	return string(r[start:end])
 }
+
+// MapMerge 合并 Map
+func MapMerge(target, source map[int][]map[string]string) map[int][]map[string]string {
+	for key, value := range source {
+		target[key] = value
+	}
+
+	return target
+}

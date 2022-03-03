@@ -73,7 +73,22 @@ func generateLongCode(id string) (map[string]string, error) {
 
 // 检查地址码
 func checkAddressCode(addressCode string, birthdayCode string, strict bool) bool {
-	return getAddressInfo(addressCode, birthdayCode, strict)["province"] != ""
+	addressInfo := getAddressInfo(addressCode, birthdayCode, strict)
+	// 用于判断是否是港澳台居民居住证（8字开头）
+	// 港澳台居民居住证无市级、县级信息
+	firstCharacter := substr(addressCode, 0, 1)
+	if firstCharacter == "8" && addressInfo["province"] != "" {
+		return true
+	}
+
+	// 这里不判断市级信息的原因：
+	// 1. 直辖市，无市级信息
+	// 2. 省直辖县或县级市，无市级信息
+	if addressInfo["province"] == "" || addressInfo["district"] == "" {
+		return false
+	}
+
+	return true
 }
 
 // 检查出生日期码
