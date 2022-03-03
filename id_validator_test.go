@@ -13,7 +13,7 @@ import (
 // go tool cover -html=cover.out
 func TestIsValid(t *testing.T) {
 	ids := [4]string{
-		"440308199901101512",
+		"500154199301135886",
 		"610104620927690",
 		"810000199408230021",
 		"830000199201300022",
@@ -40,7 +40,7 @@ func TestIsValid(t *testing.T) {
 }
 
 func TestGetInfo(t *testing.T) {
-	_, err := GetInfo("440308199901101512", false)
+	_, err := GetInfo("500154199301135886", false)
 	if err != nil {
 		t.Errorf("Errors must be nil.")
 	}

@@ -13,7 +13,7 @@ func BenchmarkIsValid(b *testing.B) {
 		name string
 		id   string
 	}{
-		{id: "440308199901101512"},
+		{id: "500154199301135886"},
 		{id: "610104620927690"},
 		{id: "810000199408230021"},
 		{id: "830000199201300022"},
@@ -21,7 +21,7 @@ func BenchmarkIsValid(b *testing.B) {
 	for _, bm := range benchmarks {
 		b.Run(bm.name, func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
-				IsValid(bm.id, true)
+				IsValid(bm.id, false)
 			}
 		})
 	}
@@ -32,7 +32,7 @@ func BenchmarkGetInfo(b *testing.B) {
 		name string
 		id   string
 	}{
-		{id: "440308199901101512"},
+		{id: "500154199301135886"},
 		{id: "610104620927690"},
 		{id: "810000199408230021"},
 		{id: "830000199201300022"},
@@ -40,7 +40,7 @@ func BenchmarkGetInfo(b *testing.B) {
 	for _, bm := range benchmarks {
 		b.Run(bm.name, func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
-				_, err := GetInfo(bm.id, true)
+				_, err := GetInfo(bm.id, false)
 				if err != nil {
 					b.Errorf("There’s been a mistake(%s):%s", bm.id, err.Error())
 				}
