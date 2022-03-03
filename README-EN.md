@@ -2,11 +2,11 @@
 
 [简体中文](README.md) | [ENGLISH](README-EN.md)
 
-> China ID number verification.
+> China ID number validator.
 
 ## Features
 
-* China ID number verification
+* Verify China ID number
 * Get ID number information
 * Upgrade 15-digit ID number to 18
 * Forged ID number that meets the verification

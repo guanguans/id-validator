@@ -2,7 +2,7 @@
 
 [简体中文](README.md) | [ENGLISH](README-EN.md)
 
-> 中国身份证号验证。
+> 中国身份证号验证器。
 
 [![tests](https://github.com/guanguans/id-validator/actions/workflows/tests.yml/badge.svg)](https://github.com/guanguans/id-validator/actions/workflows/tests.yml)
 [![gocover.io](https://gocover.io/_badge/github.com/guanguans/id-validator)](https://gocover.io/github.com/guanguans/id-validator)
@@ -13,7 +13,7 @@
 
 ## 功能
 
-* 中国身份证号验证
+* 验证中国身份证号
 * 获取身份证号信息
 * 升级 15 位身份证号为 18 位
 * 伪造符合校验的身份证号
