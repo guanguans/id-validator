@@ -41,36 +41,36 @@ import (
 )
 
 func main() {
-	// 验证身份证号合法性
-	ffmt.P(idvalidator.IsValid("440308199901101512", false)) // 非严格模式验证大陆居民身份证18位
-	ffmt.P(idvalidator.IsValid("440308199901101512", true))  // 严格模式验证大陆居民身份证18位
-	ffmt.P(idvalidator.IsValid("11010119900307803X", false)) // 大陆居民身份证末位是X18位
-	ffmt.P(idvalidator.IsValid("610104620927690", false))    // 大陆居民身份证15位
-	ffmt.P(idvalidator.IsValid("810000199408230021", false)) // 港澳居民居住证18位
-	ffmt.P(idvalidator.IsValid("830000199201300022", false)) // 台湾居民居住证18位
+    // 验证身份证号合法性
+    ffmt.P(idvalidator.IsValid("500154199301135886", true))  // 严格模式验证大陆居民身份证18位
+    ffmt.P(idvalidator.IsValid("500154199301135886", false)) // 非严格模式验证大陆居民身份证18位
+    ffmt.P(idvalidator.IsValid("11010119900307803X", false)) // 大陆居民身份证末位是X18位
+    ffmt.P(idvalidator.IsValid("610104620927690", false))    // 大陆居民身份证15位
+    ffmt.P(idvalidator.IsValid("810000199408230021", false)) // 港澳居民居住证18位
+    ffmt.P(idvalidator.IsValid("830000199201300022", false)) // 台湾居民居住证18位
 
-	// 获取身份证号信息
-	ffmt.P(idvalidator.GetInfo("440308199901101512", false)) // 非严格模式获取身份证号信息
-	ffmt.P(idvalidator.GetInfo("440308199901101512", true))  // 严格模式获取身份证号信息
-	// []interface {}[
-	// 	github.com/guanguans/id-validator.IdInfo{          // 身份证号信息
-	// 		AddressCode: int(440308)                           // 地址码
-	// 		Abandoned:   int(0)                                // 地址码是否废弃：1为废弃的，0为正在使用的
-	// 		Address:     string("广东省深圳市盐田区")             // 地址
-	// 		AddressTree: []string[                             // 省市区三级列表
-	//			string("广东省")                                    // 省
-	//			string("深圳市")                                    // 市
-	//			string("盐田区")                                    // 区
-	//		]
-	// 		Birthday:      <1999-01-10 00:00:00 +0800 CST>     // 出生日期
-	// 		Constellation: string("摩羯座")                     // 星座
-	// 		ChineseZodiac: string("卯兔")                       // 生肖
-	// 		Sex:           int(1)                              // 性别：1为男性，0为女性
-	// 		Length:        int(18)                             // 号码长度
-	// 		CheckBit:      string("2")                         // 校验码
-	// 	}
-	// 	<nil>                                              // 错误信息
-	// ]
+    // 获取身份证号信息
+    ffmt.P(idvalidator.GetInfo("500154199301135886", true))  // 严格模式获取身份证号信息
+    ffmt.P(idvalidator.GetInfo("500154199301135886", false)) // 非严格模式获取身份证号信息
+    // []interface {}[
+    //     github.com/guanguans/id-validator.IdInfo{          // 身份证号信息
+    //         AddressCode: int(500154)                           // 地址码
+    //         Abandoned:   int(0)                                // 地址码是否废弃：1为废弃的，0为正在使用的
+    //         Address:     string("重庆市市辖区开州区")             // 地址
+    //         AddressTree: []string[                             // 省市区三级列表
+	// 		       string("重庆市")                                    // 省
+    //             string("市辖区")                                    // 市
+    //             string("开州区")                                    // 区
+    //         ]
+    //         Birthday:      <1993-01-13 00:00:00 +0800 CST>     // 出生日期
+    //         Constellation: string("摩羯座")                     // 星座
+    //         ChineseZodiac: string("酉鸡")                       // 生肖
+    //         Sex:           int(0)                              // 性别：1为男性，0为女性
+    //         Length:        int(18)                             // 号码长度
+    //         CheckBit:      string("6")                         // 校验码
+    //     }
+    //     <nil>                                              // 错误信息
+    // ]
 
 	// 生成可通过校验的假身份证号
 	ffmt.P(idvalidator.FakeId()) // 随机生成
