@@ -47,6 +47,16 @@ func IsValid(id string, strict bool) bool {
 	return code["checkBit"] == generatorCheckBit(code["body"])
 }
 
+// IsLooseValid 宽松验证身份证号合法性
+func IsLooseValid(id string) bool {
+	return IsValid(id, false)
+}
+
+// IsStrictValid 严格验证身份证号合法性
+func IsStrictValid(id string) bool {
+	return IsValid(id, true)
+}
+
 // GetInfo 获取身份证信息
 func GetInfo(id string, strict bool) (IdInfo, error) {
 	// 验证有效性
