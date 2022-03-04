@@ -124,7 +124,7 @@ func TestFakeRequireId(t *testing.T) {
 		t.Errorf("got8 must be true.: %v", got8)
 	}
 
-	id := FakeRequireId(false, "江苏省", "1995", 0)
+	id := FakeRequireId(false, "江苏省", "19951102", 0)
 	if !IsValid(id, false) {
 		t.Errorf("ID must be valid.: %s", id)
 	}
@@ -138,8 +138,8 @@ func TestFakeRequireId(t *testing.T) {
 	if info.AddressTree[0] != "江苏省" {
 		t.Errorf("Province must be 江苏省.: %s", info.AddressTree[0])
 	}
-	if year := info.Birthday.Format("2006"); year != "1995" {
-		t.Errorf("Year of birth must be 1995.: %s", year)
+	if birthday := info.Birthday.Format("20060102"); birthday != "19951102" {
+		t.Errorf("Birthday must be 19951102.: %s", birthday)
 	}
 }
 
