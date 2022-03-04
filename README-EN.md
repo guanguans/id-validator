@@ -31,8 +31,8 @@ Let's start with a trivial example:
 package main
 
 import (
-	idvalidator "github.com/guanguans/id-validator"
-	"gopkg.in/ffmt.v1"
+    idvalidator "github.com/guanguans/id-validator"
+    "gopkg.in/ffmt.v1"
 )
 
 func main() {
@@ -53,7 +53,7 @@ func main() {
     //         Abandoned:   int(0)                                // 地址码是否废弃：1为废弃的，0为正在使用的
     //         Address:     string("重庆市市辖区开州区")             // 地址
     //         AddressTree: []string[                             // 省市区三级列表
-	// 		       string("重庆市")                                    // 省
+    //             string("重庆市")                                    // 省
     //             string("市辖区")                                    // 市
     //             string("开州区")                                    // 区
     //         ]
@@ -67,16 +67,16 @@ func main() {
     //     <nil>                                              // 错误信息
     // ]
 
-	// 生成可通过校验的假身份证号
-	ffmt.P(idvalidator.FakeId()) // 随机生成
-	ffmt.P(idvalidator.FakeRequireId(true, "江苏省", "200001", 1)) // 生成出生于2000年1月江苏省的男性居民身份证
+    // 生成可通过校验的假身份证号
+    ffmt.P(idvalidator.FakeId())                                  // 随机生成
+    ffmt.P(idvalidator.FakeRequireId(true, "江苏省", "200001", 1)) // 生成出生于2000年1月江苏省的男性居民身份证
 
-	// 15位号码升级为18位
-	ffmt.P(idvalidator.UpgradeId("610104620927690"))
-	// []interface {}[
-	// 	string("610104196209276908") // 升级后号码
-	// 	<nil>                        // 错误信息
-	// ]
+    // 15位号码升级为18位
+    ffmt.P(idvalidator.UpgradeId("610104620927690"))
+    // []interface {}[
+    // 	string("610104196209276908") // 升级后号码
+    // 	<nil>                        // 错误信息
+    // ]
 }
 ```
 
