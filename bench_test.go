@@ -9,41 +9,69 @@ import (
 )
 
 func BenchmarkIsValid(b *testing.B) {
-	benchmarks := []struct {
+	benchmarks1 := []struct {
 		name string
 		id   string
 	}{
-		{id: "500154199301135886"},
-		{id: "610104620927690"},
-		{id: "810000199408230021"},
-		{id: "830000199201300022"},
+		{id: "440308199902301512"}, // 无效(出生日期码不合法)
+		{id: "11010119900307867X"}, // 无效(校验位不合法)
+		{id: "441282198101011230"}, // 特殊(历史遗留数据)
+		{id: "370620199505100123"}, // 特殊(出生日期在地址码发布之前)
+		{id: "110101199003078670"}, // 正常
 	}
-	for _, bm := range benchmarks {
+	for _, bm := range benchmarks1 {
 		b.Run(bm.name, func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
 				IsValid(bm.id, false)
 			}
 		})
 	}
-}
 
-func BenchmarkGetInfo(b *testing.B) {
-	benchmarks := []struct {
+	benchmarks2 := []struct {
 		name string
 		id   string
 	}{
-		{id: "500154199301135886"},
-		{id: "610104620927690"},
-		{id: "810000199408230021"},
-		{id: "830000199201300022"},
+		{id: "370620199505100123"}, // 特殊(出生日期在地址码发布之前)
 	}
-	for _, bm := range benchmarks {
+	for _, bm := range benchmarks2 {
 		b.Run(bm.name, func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
-				_, err := GetInfo(bm.id, false)
-				if err != nil {
-					b.Errorf("There’s been a mistake(%s):%s", bm.id, err.Error())
-				}
+				IsValid(bm.id, true)
+			}
+		})
+	}
+}
+
+func BenchmarkGetInfo(b *testing.B) {
+	benchmarks1 := []struct {
+		name string
+		id   string
+	}{
+		{id: "11010119900307867X"}, // 无效(校验位不合法)
+		{id: "441282198101011230"}, // 特殊(历史遗留数据：广东省肇庆市罗定市)
+		{id: "370620199505100123"}, // 特殊(出生日期在地址码发布之前)
+		{id: "110101199003078670"}, // 正常
+
+	}
+	for _, bm := range benchmarks1 {
+		b.Run(bm.name, func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				GetInfo(bm.id, false)
+			}
+		})
+	}
+
+	benchmarks2 := []struct {
+		name string
+		id   string
+	}{
+		{id: "500154199301135886"}, // 特殊(出生日期在地址码发布之前)
+
+	}
+	for _, bm := range benchmarks2 {
+		b.Run(bm.name, func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				GetInfo(bm.id, true)
 			}
 		})
 	}
@@ -64,8 +92,7 @@ func BenchmarkFakeRequireId(b *testing.B) {
 		sex        int
 	}{
 		{isEighteen: false, address: "浙江省", birthday: "20000101", sex: 1},
-		{isEighteen: true, address: "浙江省", birthday: "20000101", sex: 0},
-		{isEighteen: true, address: "台湾省", birthday: "20000101", sex: 0},
+		{isEighteen: true, address: "台湾省", birthday: "20000101", sex: 1},
 		{isEighteen: true, address: "香港特别行政区", birthday: "20000101", sex: 0},
 	}
 	for _, bm := range benchmarks {
@@ -82,16 +109,13 @@ func BenchmarkUpgradeId(b *testing.B) {
 		name string
 		id   string
 	}{
-		{id: "610104620927690"},
-		// {id: "61010462092769"},
+		{id: "610104620927690"}, // 有效
+		{id: "61010462092769"},  // 无效
 	}
 	for _, bm := range benchmarks {
 		b.Run(bm.name, func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
-				_, err := UpgradeId(bm.id)
-				if err != nil {
-					b.Errorf("There’s been a mistake(%s):%s", bm.id, err.Error())
-				}
+				UpgradeId(bm.id)
 			}
 		})
 	}

@@ -10,31 +10,30 @@ import "testing"
 // go tool cover -func=cover.out
 // go tool cover -html=cover.out
 func TestFeature(t *testing.T) {
-	isValid1 := IsValid(FakeId(), false)
-	if !isValid1 {
-		t.Errorf("`isValid1` must be true.")
-	}
+	for i := 0; i < 100; i++ {
+		if got1 := IsValid(FakeId(), false); !got1 {
+			t.Errorf("`got1` must be true.: %v", got1)
+		}
 
-	isValid2 := IsValid(FakeRequireId(true, "江苏省", "200001", 1), false)
-	if !isValid2 {
-		t.Errorf("`isValid2` must be true.")
-	}
+		if got2 := IsValid(FakeRequireId(true, "江苏省", "200001", 1), false); !got2 {
+			t.Errorf("`got2` must be true.: %v", got2)
+		}
 
-	_, err1 := GetInfo(FakeId(), false)
-	if err1 != nil {
-		t.Errorf("`err1` must be nil.")
-	}
+		if _, e1 := GetInfo(FakeId(), false); e1 != nil {
+			t.Errorf("`e1` must be nil.: %v", e1)
+		}
 
-	_, err2 := GetInfo(FakeRequireId(true, "江苏省", "200001", 1), false)
-	if err2 != nil {
-		t.Errorf("`err2` must be nil.")
-	}
+		if _, e2 := GetInfo(FakeRequireId(true, "江苏省", "200001", 1), false); e2 != nil {
+			t.Errorf("`e2` must be nil.: %v", e2)
+		}
 
-	upgradedID, err3 := UpgradeId("610104620927690")
-	if err3 != nil {
-		t.Errorf("`err3` must be nil.")
-	}
-	if len(upgradedID) != 18 {
-		t.Errorf("`upgradedId` length must be 18.:%d", len(upgradedID))
+		// id, e3 := UpgradeId(FakeRequireId(false, "", "", 0))
+		id, e3 := UpgradeId("610104620927690")
+		if e3 != nil {
+			t.Errorf("`e3` must be nil.: %v", e3)
+		}
+		if l := len(id); l != 18 {
+			t.Errorf("`id` of length must be 18.: %d", l)
+		}
 	}
 }
