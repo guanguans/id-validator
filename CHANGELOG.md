@@ -2,6 +2,17 @@
 
 All notable changes to `guanguans/id-validator` will be documented in this file
 
+## v1.1.7 - 2022-03-04
+
+## What's Changed
+
+- Bump actions/setup-go from 2.1.5 to 2.2.0 by @dependabot in https://github.com/guanguans/id-validator/pull/14
+- Bump golangci/golangci-lint-action from 2 to 3 by @dependabot in https://github.com/guanguans/id-validator/pull/16
+- Bump actions/setup-go from 2.2.0 to 3 by @dependabot in https://github.com/guanguans/id-validator/pull/17
+- Bump actions/checkout from 2 to 3 by @dependabot in https://github.com/guanguans/id-validator/pull/18
+
+**Full Changelog**: https://github.com/guanguans/id-validator/compare/v1.1.6...v1.1.7
+
 ## v1.1.6 - 2022-01-21
 
 ## What's Changed
