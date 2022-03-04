@@ -115,7 +115,6 @@ func FakeId() string {
 // birthday   出生日期：如 `2000`、`198801`、`19990101`
 // sex        性别：1为男性，0为女性
 func FakeRequireId(isEighteen bool, address string, birthday string, sex int) string {
-
 	// 生成地址码
 	var addressCode string
 	if address == "" {
