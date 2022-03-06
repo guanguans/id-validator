@@ -5,6 +5,7 @@
 package idvalidator
 
 import (
+	"fmt"
 	"math"
 	"math/rand"
 	"regexp"
@@ -111,9 +112,9 @@ func getRandAddressCode(pattern string) string {
 func generatorBirthdayCode(addressCode string, address string, birthday string) string {
 	startYear := "0001"
 	endYear := "9999"
-	year := datePipelineHandle(datePad(substr(birthday, 0, 4), "year"), "year")
-	month := datePipelineHandle(datePad(substr(birthday, 4, 6), "month"), "month")
-	day := datePipelineHandle(datePad(substr(birthday, 6, 8), "day"), "day")
+	year := datePipeHandle(datePad(substr(birthday, 0, 4), "year"), "year")
+	month := datePipeHandle(datePad(substr(birthday, 4, 6), "month"), "month")
+	day := datePipeHandle(datePad(substr(birthday, 6, 8), "day"), "day")
 
 	addressCodeInt := cast.ToInt(addressCode)
 	if _, ok := data.AddressCodeTimeline[addressCodeInt]; ok {
@@ -151,7 +152,7 @@ func generatorBirthdayCode(addressCode string, address string, birthday string) 
 }
 
 // 日期处理
-func datePipelineHandle(date string, category string) string {
+func datePipeHandle(date string, category string) string {
 	dateInt := cast.ToInt(date)
 
 	switch category {
@@ -196,13 +197,5 @@ func datePad(date string, category string) string {
 		padLength = 4
 	}
 
-	for i := 0; i < padLength; i++ {
-		length := len([]rune(date))
-		if length < padLength {
-			// date = fmt.Sprintf("%s%s", "0", date)
-			date = "0" + date
-		}
-	}
-
-	return date
+	return fmt.Sprintf(fmt.Sprintf("%%0%ds", padLength), date)
 }
