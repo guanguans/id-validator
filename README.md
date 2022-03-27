@@ -2,7 +2,7 @@
 
 [简体中文](README.md) | [ENGLISH](README-EN.md)
 
-> 中国身份证号验证器。
+> China ID number validator. - 中国身份证号验证器。
 
 [![tests](https://github.com/guanguans/id-validator/actions/workflows/tests.yml/badge.svg)](https://github.com/guanguans/id-validator/actions/workflows/tests.yml)
 [![codecov](https://codecov.io/gh/guanguans/id-validator/branch/main/graph/badge.svg?token=7X523bI44b)](https://codecov.io/gh/guanguans/id-validator)
