@@ -52,12 +52,11 @@ var provinceAddressCodeTimelinePluck = map[string]func() map[int][]map[string]st
 }
 
 func GetAddressCodeTimeline(code int) ([]map[string]string, bool) {
-	codeStr := cast.ToString(code)
-	if len(codeStr) < 2 {
-		return nil, false
+	if code < 110000 || code > 830000 {
+		return []map[string]string{}, false
 	}
 
-	f, ok := provinceAddressCodeTimelinePluck[codeStr[:2]]
+	f, ok := provinceAddressCodeTimelinePluck[cast.ToString(code)[:2]]
 	if !ok {
 		timeline, ok := getAddressCodeTimelineAdditional()[code]
 		return timeline, ok
