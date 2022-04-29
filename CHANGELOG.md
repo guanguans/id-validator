@@ -2,6 +2,15 @@
 
 All notable changes to `guanguans/id-validator` will be documented in this file
 
+## v1.1.11 - 2022-04-29
+
+## What's Changed
+
+- Bump actions/cache from 2.1.7 to 3 by @dependabot in https://github.com/guanguans/id-validator/pull/21
+- Bump codecov/codecov-action from 2.1.0 to 3 by @dependabot in https://github.com/guanguans/id-validator/pull/22
+
+**Full Changelog**: https://github.com/guanguans/id-validator/compare/v1.1.10...v1.1.11
+
 ## v1.1.10 - 2022-03-06
 
 **Full Changelog**: https://github.com/guanguans/id-validator/compare/v1.1.9...v1.1.10
