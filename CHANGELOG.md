@@ -2,6 +2,18 @@
 
 All notable changes to `guanguans/id-validator` will be documented in this file
 
+## v1.2.0 - 2022-04-29
+
+## What's Changed
+
+- Fix:cannot startup in debug mod in goland by @zzhaoh in https://github.com/guanguans/id-validator/pull/25
+
+## New Contributors
+
+- @zzhaoh made their first contribution in https://github.com/guanguans/id-validator/pull/25
+
+**Full Changelog**: https://github.com/guanguans/id-validator/compare/v1.1.11...v1.2.0
+
 ## v1.1.11 - 2022-04-29
 
 ## What's Changed
