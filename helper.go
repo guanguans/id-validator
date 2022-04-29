@@ -42,7 +42,7 @@ func getAddressInfo(addressCode string, birthdayCode string, strict bool) map[st
 // 获取省市区地址码
 func getAddress(addressCode string, birthdayCode string, strict bool) string {
 	address := ""
-	timeline, ok := data.GetAddressCodeTimeline(cast.ToInt(addressCode))
+	timeline, ok := data.GetAddressCodeTimeline(cast.ToUint32(addressCode))
 	if !ok {
 		// 修复 \d\d\d\d01、\d\d\d\d02、\d\d\d\d11 和 \d\d\d\d20 的历史遗留问题
 		// 以上四种地址码，现实身份证真实存在，但民政部历年公布的官方地址码中可能没有查询到

@@ -9,7 +9,7 @@ package data
 // 注1：台湾省、香港特别行政区和澳门特别行政区暂缺地市和区县信息
 // 注2：每月发布的区划变更表是根据区划变更地的统计人员在统计信息系统更新后的情况所绘制，与区划变更文件发布的时间有一定的延迟性，但在每年的最后一次发布变更情况后与区划全年变更文件保持一致。
 // Data Source: http://www.mca.gov.cn/article/sj/xzqh/
-var AddressCode = map[int]string{
+var AddressCode = map[uint32]string{
 	110000: "北京市",
 	110101: "东城区",
 	110102: "西城区",

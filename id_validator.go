@@ -65,14 +65,14 @@ func GetInfo(id string, strict bool) (IdInfo, error) {
 	}
 
 	code, _ := generateCode(id)
-	addressCode := cast.ToInt(code["addressCode"])
+	addressCode := cast.ToUint32(code["addressCode"])
 
 	// 地址信息
 	addressInfo := getAddressInfo(code["addressCode"], code["birthdayCode"], strict)
 	addressTree := []string{addressInfo["province"], addressInfo["city"], addressInfo["district"]}
 
 	// 是否废弃
-	var abandoned int
+	abandoned := 0
 	if data.AddressCode[addressCode] == "" {
 		abandoned = 1
 	}
@@ -91,7 +91,7 @@ func GetInfo(id string, strict bool) (IdInfo, error) {
 	length := cast.ToInt(code["type"])
 
 	return IdInfo{
-		AddressCode:   addressCode,
+		AddressCode:   int(addressCode),
 		Abandoned:     abandoned,
 		Address:       addressInfo["province"] + addressInfo["city"] + addressInfo["district"],
 		AddressTree:   addressTree,

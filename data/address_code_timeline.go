@@ -13,7 +13,7 @@ import (
 // 注1：台湾省、香港特别行政区和澳门特别行政区暂缺地市和区县信息
 // 注2：每月发布的区划变更表是根据区划变更地的统计人员在统计信息系统更新后的情况所绘制，与区划变更文件发布的时间有一定的延迟性，但在每年的最后一次发布变更情况后与区划全年变更文件保持一致。
 // Data Source: http://www.mca.gov.cn/article/sj/xzqh/
-var provinceAddressCodeTimelinePluck = map[int8]func() map[int][]map[string]string{
+var provinceAddressCodeTimelinePluck = map[uint8]func() map[uint32][]map[string]string{
 	11: getAddressCodeTimelineBeiJing,
 	12: getAddressCodeTimelineTianJin,
 	13: getAddressCodeTimelineHeBei,
@@ -50,12 +50,12 @@ var provinceAddressCodeTimelinePluck = map[int8]func() map[int][]map[string]stri
 	83: getAddressCodeTimelineTaiWan,
 }
 
-func GetAddressCodeTimeline(code int) ([]map[string]string, bool) {
+func GetAddressCodeTimeline(code uint32) ([]map[string]string, bool) {
 	if code < 110000 || code > 830000 {
 		return []map[string]string{}, false
 	}
 
-	f, ok := provinceAddressCodeTimelinePluck[int8(math.Floor(float64(code)/10000))]
+	f, ok := provinceAddressCodeTimelinePluck[uint8(math.Floor(float64(code)/10000))]
 	if !ok {
 		timeline, ok := getAddressCodeTimelineAdditional()[code]
 		return timeline, ok
@@ -70,8 +70,8 @@ func GetAddressCodeTimeline(code int) ([]map[string]string, bool) {
 	return timeline, ok
 }
 
-func getAddressCodeTimelineBeiJing() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineBeiJing() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		110000: {
 			{
 				"address":    "北京市",
@@ -341,8 +341,8 @@ func getAddressCodeTimelineBeiJing() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineTianJin() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineTianJin() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		120000: {
 			{
 				"address":    "天津市",
@@ -576,8 +576,8 @@ func getAddressCodeTimelineTianJin() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineHeBei() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineHeBei() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		130000: {
 			{
 				"address":    "河北省",
@@ -3759,8 +3759,8 @@ func getAddressCodeTimelineHeBei() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineShanXi14() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineShanXi14() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		140000: {
 			{
 				"address":    "山西省",
@@ -6141,8 +6141,8 @@ func getAddressCodeTimelineShanXi14() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineNeiMengGu() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineNeiMengGu() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		150000: {
 			{
 				"address":    "内蒙古自治区",
@@ -7788,8 +7788,8 @@ func getAddressCodeTimelineNeiMengGu() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineLiaoNing() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineLiaoNing() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		210000: {
 			{
 				"address":    "辽宁省",
@@ -9222,8 +9222,8 @@ func getAddressCodeTimelineLiaoNing() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineJiLin() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineJiLin() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		220000: {
 			{
 				"address":    "吉林省",
@@ -10360,8 +10360,8 @@ func getAddressCodeTimelineJiLin() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineHeiLongJiang() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineHeiLongJiang() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		230000: {
 			{
 				"address":    "黑龙江省",
@@ -12853,8 +12853,8 @@ func getAddressCodeTimelineHeiLongJiang() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineShangHai() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineShangHai() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		310000: {
 			{
 				"address":    "上海市",
@@ -13152,8 +13152,8 @@ func getAddressCodeTimelineShangHai() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineJiangSu() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineJiangSu() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		320000: {
 			{
 				"address":    "江苏省",
@@ -15359,8 +15359,8 @@ func getAddressCodeTimelineJiangSu() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineZheJiang() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineZheJiang() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		330000: {
 			{
 				"address":    "浙江省",
@@ -17413,8 +17413,8 @@ func getAddressCodeTimelineZheJiang() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineAnHui() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineAnHui() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		340000: {
 			{
 				"address":    "安徽省",
@@ -19223,8 +19223,8 @@ func getAddressCodeTimelineAnHui() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineFuJian() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineFuJian() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		350000: {
 			{
 				"address":    "福建省",
@@ -21039,8 +21039,8 @@ func getAddressCodeTimelineFuJian() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineJiangXi() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineJiangXi() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		360000: {
 			{
 				"address":    "江西省",
@@ -23183,8 +23183,8 @@ func getAddressCodeTimelineJiangXi() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineShanDong() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineShanDong() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		370000: {
 			{
 				"address":    "山东省",
@@ -25847,8 +25847,8 @@ func getAddressCodeTimelineShanDong() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineHeNan() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineHeNan() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		410000: {
 			{
 				"address":    "河南省",
@@ -28583,8 +28583,8 @@ func getAddressCodeTimelineHeNan() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineHuBei() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineHuBei() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		420000: {
 			{
 				"address":    "湖北省",
@@ -30411,8 +30411,8 @@ func getAddressCodeTimelineHuBei() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineHuNan() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineHuNan() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		430000: {
 			{
 				"address":    "湖南省",
@@ -32613,8 +32613,8 @@ func getAddressCodeTimelineHuNan() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineGuangDong() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineGuangDong() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		440000: {
 			{
 				"address":    "广东省",
@@ -35520,8 +35520,8 @@ func getAddressCodeTimelineGuangDong() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineGuangXi() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineGuangXi() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		450000: {
 			{
 				"address":    "广西壮族自治区",
@@ -37274,8 +37274,8 @@ func getAddressCodeTimelineGuangXi() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineHaiNan() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineHaiNan() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		460000: {
 			{
 				"address":    "海南省",
@@ -37669,8 +37669,8 @@ func getAddressCodeTimelineHaiNan() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineChongQing() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineChongQing() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		500000: {
 			{
 				"address":    "重庆市",
@@ -38067,8 +38067,8 @@ func getAddressCodeTimelineChongQing() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineSiChuan() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineSiChuan() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		510000: {
 			{
 				"address":    "四川省",
@@ -42569,8 +42569,8 @@ func getAddressCodeTimelineSiChuan() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineGuiZhou() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineGuiZhou() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		520000: {
 			{
 				"address":    "贵州省",
@@ -43754,8 +43754,8 @@ func getAddressCodeTimelineGuiZhou() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineYunNan() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineYunNan() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		530000: {
 			{
 				"address":    "云南省",
@@ -45599,8 +45599,8 @@ func getAddressCodeTimelineYunNan() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineXiZang() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineXiZang() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		540000: {
 			{
 				"address":    "西藏自治区",
@@ -46792,8 +46792,8 @@ func getAddressCodeTimelineXiZang() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineShanXi61() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineShanXi61() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		610000: {
 			{
 				"address":    "陕西省",
@@ -48434,8 +48434,8 @@ func getAddressCodeTimelineShanXi61() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineGanSu() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineGanSu() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		620000: {
 			{
 				"address":    "甘肃省",
@@ -49728,8 +49728,8 @@ func getAddressCodeTimelineGanSu() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineQingHai() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineQingHai() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		630000: {
 			{
 				"address":    "青海省",
@@ -50219,8 +50219,8 @@ func getAddressCodeTimelineQingHai() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineNingXia() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineNingXia() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		640000: {
 			{
 				"address":    "宁夏回族自治区",
@@ -50636,8 +50636,8 @@ func getAddressCodeTimelineNingXia() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineXinJiang() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineXinJiang() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		650000: {
 			{
 				"address":    "新疆维吾尔自治区",
@@ -51957,8 +51957,8 @@ func getAddressCodeTimelineXinJiang() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineXiangGang() map[int][]map[string]string {
-	return map[int][]map[string]string{810000: {
+func getAddressCodeTimelineXiangGang() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{810000: {
 		{
 			"address":    "香港特别行政区",
 			"start_year": "",
@@ -51967,8 +51967,8 @@ func getAddressCodeTimelineXiangGang() map[int][]map[string]string {
 	}}
 }
 
-func getAddressCodeTimelineAoMen() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineAoMen() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		820000: {
 			{
 				"address":    "澳门特别行政区",
@@ -51979,8 +51979,8 @@ func getAddressCodeTimelineAoMen() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineTaiWan() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineTaiWan() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		830000: {
 			{
 				"address":    "台湾省",
@@ -51991,8 +51991,8 @@ func getAddressCodeTimelineTaiWan() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineAdditional() map[int][]map[string]string {
-	return map[int][]map[string]string{
+func getAddressCodeTimelineAdditional() map[uint32][]map[string]string {
+	return map[uint32][]map[string]string{
 		// 行政区划代码（地址码）补充数据
 		110100: {
 			{
