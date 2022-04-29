@@ -59,13 +59,13 @@ func GetAddressCodeTimeline(code int) ([]map[string]string, bool) {
 
 	f, ok := provinceAddressCodeTimelinePluck[codeStr[:2]]
 	if !ok {
-		timeline, ok := getAddressCodeTimelineOther()[code]
+		timeline, ok := getAddressCodeTimelineAdditional()[code]
 		return timeline, ok
 	}
 
 	timeline, ok := f()[code]
 	if !ok {
-		timeline, ok := getAddressCodeTimelineOther()[code]
+		timeline, ok := getAddressCodeTimelineAdditional()[code]
 		return timeline, ok
 	}
 
@@ -51993,7 +51993,7 @@ func getAddressCodeTimelineTaiWan() map[int][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineOther() map[int][]map[string]string {
+func getAddressCodeTimelineAdditional() map[int][]map[string]string {
 	return map[int][]map[string]string{
 		// 行政区划代码（地址码）补充数据
 		110100: {
