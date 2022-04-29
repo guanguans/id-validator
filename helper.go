@@ -43,7 +43,8 @@ func getAddressInfo(addressCode string, birthdayCode string, strict bool) map[st
 func getAddress(addressCode string, birthdayCode string, strict bool) string {
 	address := ""
 	addressCodeInt := cast.ToInt(addressCode)
-	if _, ok := data.AddressCodeTimeline[addressCodeInt]; !ok {
+	timeline, ok := data.AddressCodeTimeline[addressCodeInt]
+	if !ok {
 		// 修复 \d\d\d\d01、\d\d\d\d02、\d\d\d\d11 和 \d\d\d\d20 的历史遗留问题
 		// 以上四种地址码，现实身份证真实存在，但民政部历年公布的官方地址码中可能没有查询到
 		// 如：440401 450111 等
@@ -66,7 +67,6 @@ func getAddress(addressCode string, birthdayCode string, strict bool) string {
 		return address
 	}
 
-	timeline := data.AddressCodeTimeline[addressCodeInt]
 	year := cast.ToInt(substr(birthdayCode, 0, 4))
 	startYear := "0001"
 	endYear := "9999"
