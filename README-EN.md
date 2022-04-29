@@ -2,7 +2,7 @@
 
 [简体中文](README.md) | [ENGLISH](README-EN.md)
 
-> China ID number validator.
+> China ID number validator. - 中国身份证号验证器。
 
 ## Features
 
