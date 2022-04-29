@@ -116,8 +116,7 @@ func generatorBirthdayCode(addressCode string, address string, birthday string) 
 	month := datePipeHandle(datePad(substr(birthday, 4, 6), "month"), "month")
 	day := datePipeHandle(datePad(substr(birthday, 6, 8), "day"), "day")
 
-	addressCodeInt := cast.ToInt(addressCode)
-	if timeLine, ok := data.GetAddressCodeTimeline(addressCodeInt); ok {
+	if timeLine, ok := data.GetAddressCodeTimeline(cast.ToInt(addressCode)); ok {
 		for _, val := range timeLine {
 			if val["address"] == address {
 				if val["start_year"] != "" {

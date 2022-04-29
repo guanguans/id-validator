@@ -4,7 +4,9 @@
 
 package data
 
-import "strconv"
+import (
+	"github.com/spf13/cast"
+)
 
 // AddressCodeTimeline 行政区划代码（地址码）更新时间线
 // 中华人民共和国民政部权威数据
@@ -12,70 +14,62 @@ import "strconv"
 // 注2：每月发布的区划变更表是根据区划变更地的统计人员在统计信息系统更新后的情况所绘制，与区划变更文件发布的时间有一定的延迟性，但在每年的最后一次发布变更情况后与区划全年变更文件保持一致。
 // Data Source: http://www.mca.gov.cn/article/sj/xzqh/
 
-var provinceAddressCodeTimelineMap = map[int]func() map[int][]map[string]string{
-	11: getAddressCodeTimelineBeiJing,
-	12: getAddressCodeTimelineTianJin,
-	13: getAddressCodeTimelineHeBei,
-	14: getAddressCodeTimelineShanXi14,
-	15: getAddressCodeTimelineNeiMengGu,
-	21: getAddressCodeTimelineLiaoNing,
-	22: getAddressCodeTimelineJiLin,
-	23: getAddressCodeTimelineHeiLongJiang,
-	31: getAddressCodeTimelineShangHai,
-	32: getAddressCodeTimelineJiangSu,
-	33: getAddressCodeTimelineZheJiang,
-	34: getAddressCodeTimelineAnHui,
-	35: getAddressCodeTimelineFuJian,
-	36: getAddressCodeTimelineJiangXi,
-	37: getAddressCodeTimelineShanDong,
-	41: getAddressCodeTimelineHeNan,
-	42: getAddressCodeTimelineHuBei,
-	43: getAddressCodeTimelineHuNan,
-	44: getAddressCodeTimelineGuangDong,
-	45: getAddressCodeTimelineGuangXi,
-	46: getAddressCodeTimelineHaiNan,
-	50: getAddressCodeTimelineChongQing,
-	51: getAddressCodeTimelineSiChuan,
-	52: getAddressCodeTimelineGuiZhou,
-	53: getAddressCodeTimelineYunNan,
-	54: getAddressCodeTimelineXiZang,
-	61: getAddressCodeTimelineShanXi61,
-	62: getAddressCodeTimelineGanSu,
-	63: getAddressCodeTimelineQingHai,
-	64: getAddressCodeTimelineNingXia,
-	65: getAddressCodeTimelineXinJiang,
-	81: getAddressCodeTimelineXiangGang,
-	82: getAddressCodeTimelineAoMen,
-	83: getAddressCodeTimelineTaiWan,
+var provinceAddressCodeTimelinePluck = map[string]func() map[int][]map[string]string{
+	"11": getAddressCodeTimelineBeiJing,
+	"12": getAddressCodeTimelineTianJin,
+	"13": getAddressCodeTimelineHeBei,
+	"14": getAddressCodeTimelineShanXi14,
+	"15": getAddressCodeTimelineNeiMengGu,
+	"21": getAddressCodeTimelineLiaoNing,
+	"22": getAddressCodeTimelineJiLin,
+	"23": getAddressCodeTimelineHeiLongJiang,
+	"31": getAddressCodeTimelineShangHai,
+	"32": getAddressCodeTimelineJiangSu,
+	"33": getAddressCodeTimelineZheJiang,
+	"34": getAddressCodeTimelineAnHui,
+	"35": getAddressCodeTimelineFuJian,
+	"36": getAddressCodeTimelineJiangXi,
+	"37": getAddressCodeTimelineShanDong,
+	"41": getAddressCodeTimelineHeNan,
+	"42": getAddressCodeTimelineHuBei,
+	"43": getAddressCodeTimelineHuNan,
+	"44": getAddressCodeTimelineGuangDong,
+	"45": getAddressCodeTimelineGuangXi,
+	"46": getAddressCodeTimelineHaiNan,
+	"50": getAddressCodeTimelineChongQing,
+	"51": getAddressCodeTimelineSiChuan,
+	"52": getAddressCodeTimelineGuiZhou,
+	"53": getAddressCodeTimelineYunNan,
+	"54": getAddressCodeTimelineXiZang,
+	"61": getAddressCodeTimelineShanXi61,
+	"62": getAddressCodeTimelineGanSu,
+	"63": getAddressCodeTimelineQingHai,
+	"64": getAddressCodeTimelineNingXia,
+	"65": getAddressCodeTimelineXinJiang,
+	"81": getAddressCodeTimelineXiangGang,
+	"82": getAddressCodeTimelineAoMen,
+	"83": getAddressCodeTimelineTaiWan,
 }
 
 func GetAddressCodeTimeline(code int) ([]map[string]string, bool) {
-	codeStr := strconv.Itoa(code)
+	codeStr := cast.ToString(code)
 	if len(codeStr) < 2 {
 		return nil, false
 	}
 
-	codePrefix, err := strconv.Atoi(codeStr[:2])
-	if err != nil {
-		return nil, false
-	}
-
-	var res []map[string]string
-	var ok bool
-	f, ok := provinceAddressCodeTimelineMap[codePrefix]
+	f, ok := provinceAddressCodeTimelinePluck[codeStr[:2]]
 	if !ok {
-		res, ok = getAddressCodeTimelineOther()[code]
-
-		return res, ok
+		timeline, ok := getAddressCodeTimelineOther()[code]
+		return timeline, ok
 	}
 
-	res, ok = f()[code]
+	timeline, ok := f()[code]
 	if !ok {
-		res, ok = getAddressCodeTimelineOther()[code]
-		return res, ok
+		timeline, ok := getAddressCodeTimelineOther()[code]
+		return timeline, ok
 	}
 
-	return res, ok
+	return timeline, ok
 }
 
 func getAddressCodeTimelineBeiJing() map[int][]map[string]string {
