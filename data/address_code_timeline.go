@@ -51,6 +51,10 @@ var addressCodeTimelineProvincePluck = map[uint8]func() map[uint32][]map[string]
 }
 
 func GetAddressCodeTimeline(code uint32) []map[string]string {
+	if code < 110000 || code > 830000 {
+		return []map[string]string{}
+	}
+
 	f := addressCodeTimelineProvincePluck[uint8(math.Floor(float64(code)/10000))]
 	if f == nil {
 		return []map[string]string{}
