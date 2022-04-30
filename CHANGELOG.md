@@ -2,6 +2,10 @@
 
 All notable changes to `guanguans/id-validator` will be documented in this file
 
+## v1.2.4 - 2022-04-30
+
+**Full Changelog**: https://github.com/guanguans/id-validator/compare/v1.2.3...v1.2.4
+
 ## v1.2.3 - 2022-04-29
 
 **Full Changelog**: https://github.com/guanguans/id-validator/compare/v1.2.2...v1.2.3
