@@ -13,13 +13,6 @@ import (
 	"github.com/spf13/cast"
 )
 
-// 检查ID参数
-func checkIDArgument(id string) bool {
-	_, err := generateCode(id)
-
-	return err == nil
-}
-
 // 生成数据
 func generateCode(id string) (map[string]string, error) {
 	length := len(id)
