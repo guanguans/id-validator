@@ -13,41 +13,41 @@ import (
 // 注1：台湾省、香港特别行政区和澳门特别行政区暂缺地市和区县信息
 // 注2：每月发布的区划变更表是根据区划变更地的统计人员在统计信息系统更新后的情况所绘制，与区划变更文件发布的时间有一定的延迟性，但在每年的最后一次发布变更情况后与区划全年变更文件保持一致。
 // Data Source: http://www.mca.gov.cn/article/sj/xzqh/
-var provinceAddressCodeTimelinePluck = map[uint8]func() map[uint32][]map[string]string{
-	11: getAddressCodeTimelineBeiJing,
-	12: getAddressCodeTimelineTianJin,
-	13: getAddressCodeTimelineHeBei,
-	14: getAddressCodeTimelineShanXi14,
-	15: getAddressCodeTimelineNeiMengGu,
-	21: getAddressCodeTimelineLiaoNing,
-	22: getAddressCodeTimelineJiLin,
-	23: getAddressCodeTimelineHeiLongJiang,
-	31: getAddressCodeTimelineShangHai,
-	32: getAddressCodeTimelineJiangSu,
-	33: getAddressCodeTimelineZheJiang,
-	34: getAddressCodeTimelineAnHui,
-	35: getAddressCodeTimelineFuJian,
-	36: getAddressCodeTimelineJiangXi,
-	37: getAddressCodeTimelineShanDong,
-	41: getAddressCodeTimelineHeNan,
-	42: getAddressCodeTimelineHuBei,
-	43: getAddressCodeTimelineHuNan,
-	44: getAddressCodeTimelineGuangDong,
-	45: getAddressCodeTimelineGuangXi,
-	46: getAddressCodeTimelineHaiNan,
-	50: getAddressCodeTimelineChongQing,
-	51: getAddressCodeTimelineSiChuan,
-	52: getAddressCodeTimelineGuiZhou,
-	53: getAddressCodeTimelineYunNan,
-	54: getAddressCodeTimelineXiZang,
-	61: getAddressCodeTimelineShanXi61,
-	62: getAddressCodeTimelineGanSu,
-	63: getAddressCodeTimelineQingHai,
-	64: getAddressCodeTimelineNingXia,
-	65: getAddressCodeTimelineXinJiang,
-	81: getAddressCodeTimelineXiangGang,
-	82: getAddressCodeTimelineAoMen,
-	83: getAddressCodeTimelineTaiWan,
+var addressCodeTimelineProvincePluck = map[uint8]func() map[uint32][]map[string]string{
+	11: addressCodeTimelineBeiJing,
+	12: addressCodeTimelineTianJin,
+	13: addressCodeTimelineHeBei,
+	14: addressCodeTimelineShanXi14,
+	15: addressCodeTimelineNeiMengGu,
+	21: addressCodeTimelineLiaoNing,
+	22: addressCodeTimelineJiLin,
+	23: addressCodeTimelineHeiLongJiang,
+	31: addressCodeTimelineShangHai,
+	32: addressCodeTimelineJiangSu,
+	33: addressCodeTimelineZheJiang,
+	34: addressCodeTimelineAnHui,
+	35: addressCodeTimelineFuJian,
+	36: addressCodeTimelineJiangXi,
+	37: addressCodeTimelineShanDong,
+	41: addressCodeTimelineHeNan,
+	42: addressCodeTimelineHuBei,
+	43: addressCodeTimelineHuNan,
+	44: addressCodeTimelineGuangDong,
+	45: addressCodeTimelineGuangXi,
+	46: addressCodeTimelineHaiNan,
+	50: addressCodeTimelineChongQing,
+	51: addressCodeTimelineSiChuan,
+	52: addressCodeTimelineGuiZhou,
+	53: addressCodeTimelineYunNan,
+	54: addressCodeTimelineXiZang,
+	61: addressCodeTimelineShanXi61,
+	62: addressCodeTimelineGanSu,
+	63: addressCodeTimelineQingHai,
+	64: addressCodeTimelineNingXia,
+	65: addressCodeTimelineXinJiang,
+	81: addressCodeTimelineXiangGang,
+	82: addressCodeTimelineAoMen,
+	83: addressCodeTimelineTaiWan,
 }
 
 func GetAddressCodeTimeline(code uint32) ([]map[string]string, bool) {
@@ -55,17 +55,16 @@ func GetAddressCodeTimeline(code uint32) ([]map[string]string, bool) {
 		return []map[string]string{}, false
 	}
 
-	f, ok := provinceAddressCodeTimelinePluck[uint8(math.Floor(float64(code)/10000))]
+	f, ok := addressCodeTimelineProvincePluck[uint8(math.Floor(float64(code)/10000))]
 	if !ok {
 		return []map[string]string{}, false
 	}
 
 	timeline, ok := f()[code]
-
 	return timeline, ok
 }
 
-func getAddressCodeTimelineBeiJing() map[uint32][]map[string]string {
+func addressCodeTimelineBeiJing() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		110000: {
 			{
@@ -352,7 +351,7 @@ func getAddressCodeTimelineBeiJing() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineTianJin() map[uint32][]map[string]string {
+func addressCodeTimelineTianJin() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		120000: {
 			{
@@ -603,7 +602,7 @@ func getAddressCodeTimelineTianJin() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineHeBei() map[uint32][]map[string]string {
+func addressCodeTimelineHeBei() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		130000: {
 			{
@@ -3872,7 +3871,7 @@ func getAddressCodeTimelineHeBei() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineShanXi14() map[uint32][]map[string]string {
+func addressCodeTimelineShanXi14() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		140000: {
 			{
@@ -6354,7 +6353,7 @@ func getAddressCodeTimelineShanXi14() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineNeiMengGu() map[uint32][]map[string]string {
+func addressCodeTimelineNeiMengGu() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		150000: {
 			{
@@ -8087,7 +8086,7 @@ func getAddressCodeTimelineNeiMengGu() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineLiaoNing() map[uint32][]map[string]string {
+func addressCodeTimelineLiaoNing() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		210000: {
 			{
@@ -9705,7 +9704,7 @@ func getAddressCodeTimelineLiaoNing() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineJiLin() map[uint32][]map[string]string {
+func addressCodeTimelineJiLin() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		220000: {
 			{
@@ -10908,7 +10907,7 @@ func getAddressCodeTimelineJiLin() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineHeiLongJiang() map[uint32][]map[string]string {
+func addressCodeTimelineHeiLongJiang() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		230000: {
 			{
@@ -13564,7 +13563,7 @@ func getAddressCodeTimelineHeiLongJiang() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineShangHai() map[uint32][]map[string]string {
+func addressCodeTimelineShangHai() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		310000: {
 			{
@@ -13879,7 +13878,7 @@ func getAddressCodeTimelineShangHai() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineJiangSu() map[uint32][]map[string]string {
+func addressCodeTimelineJiangSu() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		320000: {
 			{
@@ -16200,7 +16199,7 @@ func getAddressCodeTimelineJiangSu() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineZheJiang() map[uint32][]map[string]string {
+func addressCodeTimelineZheJiang() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		330000: {
 			{
@@ -18418,7 +18417,7 @@ func getAddressCodeTimelineZheJiang() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineAnHui() map[uint32][]map[string]string {
+func addressCodeTimelineAnHui() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		340000: {
 			{
@@ -20398,7 +20397,7 @@ func getAddressCodeTimelineAnHui() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineFuJian() map[uint32][]map[string]string {
+func addressCodeTimelineFuJian() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		350000: {
 			{
@@ -22300,7 +22299,7 @@ func getAddressCodeTimelineFuJian() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineJiangXi() map[uint32][]map[string]string {
+func addressCodeTimelineJiangXi() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		360000: {
 			{
@@ -24537,7 +24536,7 @@ func getAddressCodeTimelineJiangXi() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineShanDong() map[uint32][]map[string]string {
+func addressCodeTimelineShanDong() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		370000: {
 			{
@@ -27392,7 +27391,7 @@ func getAddressCodeTimelineShanDong() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineHeNan() map[uint32][]map[string]string {
+func addressCodeTimelineHeNan() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		410000: {
 			{
@@ -30291,7 +30290,7 @@ func getAddressCodeTimelineHeNan() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineHuBei() map[uint32][]map[string]string {
+func addressCodeTimelineHuBei() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		420000: {
 			{
@@ -32301,7 +32300,7 @@ func getAddressCodeTimelineHuBei() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineHuNan() map[uint32][]map[string]string {
+func addressCodeTimelineHuNan() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		430000: {
 			{
@@ -34645,7 +34644,7 @@ func getAddressCodeTimelineHuNan() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineGuangDong() map[uint32][]map[string]string {
+func addressCodeTimelineGuangDong() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		440000: {
 			{
@@ -37792,7 +37791,7 @@ func getAddressCodeTimelineGuangDong() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineGuangXi() map[uint32][]map[string]string {
+func addressCodeTimelineGuangXi() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		450000: {
 			{
@@ -39681,7 +39680,7 @@ func getAddressCodeTimelineGuangXi() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineHaiNan() map[uint32][]map[string]string {
+func addressCodeTimelineHaiNan() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		460000: {
 			{
@@ -40169,7 +40168,7 @@ func getAddressCodeTimelineHaiNan() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineChongQing() map[uint32][]map[string]string {
+func addressCodeTimelineChongQing() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		500000: {
 			{
@@ -40590,7 +40589,7 @@ func getAddressCodeTimelineChongQing() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineSiChuan() map[uint32][]map[string]string {
+func addressCodeTimelineSiChuan() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		510000: {
 			{
@@ -45288,7 +45287,7 @@ func getAddressCodeTimelineSiChuan() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineGuiZhou() map[uint32][]map[string]string {
+func addressCodeTimelineGuiZhou() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		520000: {
 			{
@@ -46510,7 +46509,7 @@ func getAddressCodeTimelineGuiZhou() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineYunNan() map[uint32][]map[string]string {
+func addressCodeTimelineYunNan() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		530000: {
 			{
@@ -48427,7 +48426,7 @@ func getAddressCodeTimelineYunNan() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineXiZang() map[uint32][]map[string]string {
+func addressCodeTimelineXiZang() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		540000: {
 			{
@@ -49670,7 +49669,7 @@ func getAddressCodeTimelineXiZang() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineShanXi61() map[uint32][]map[string]string {
+func addressCodeTimelineShanXi61() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		610000: {
 			{
@@ -51398,7 +51397,7 @@ func getAddressCodeTimelineShanXi61() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineGanSu() map[uint32][]map[string]string {
+func addressCodeTimelineGanSu() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		620000: {
 			{
@@ -52792,7 +52791,7 @@ func getAddressCodeTimelineGanSu() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineQingHai() map[uint32][]map[string]string {
+func addressCodeTimelineQingHai() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		630000: {
 			{
@@ -53334,7 +53333,7 @@ func getAddressCodeTimelineQingHai() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineNingXia() map[uint32][]map[string]string {
+func addressCodeTimelineNingXia() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		640000: {
 			{
@@ -53816,7 +53815,7 @@ func getAddressCodeTimelineNingXia() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineXinJiang() map[uint32][]map[string]string {
+func addressCodeTimelineXinJiang() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		650000: {
 			{
@@ -55181,7 +55180,7 @@ func getAddressCodeTimelineXinJiang() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineXiangGang() map[uint32][]map[string]string {
+func addressCodeTimelineXiangGang() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{810000: {
 		{
 			"address":    "香港特别行政区",
@@ -55191,7 +55190,7 @@ func getAddressCodeTimelineXiangGang() map[uint32][]map[string]string {
 	}}
 }
 
-func getAddressCodeTimelineAoMen() map[uint32][]map[string]string {
+func addressCodeTimelineAoMen() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		820000: {
 			{
@@ -55203,7 +55202,7 @@ func getAddressCodeTimelineAoMen() map[uint32][]map[string]string {
 	}
 }
 
-func getAddressCodeTimelineTaiWan() map[uint32][]map[string]string {
+func addressCodeTimelineTaiWan() map[uint32][]map[string]string {
 	return map[uint32][]map[string]string{
 		830000: {
 			{
