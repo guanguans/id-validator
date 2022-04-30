@@ -73,7 +73,7 @@ func GetInfo(id string, strict bool) (IdInfo, error) {
 
 	// 是否废弃
 	abandoned := 0
-	if data.AddressCode[addressCode] == "" {
+	if data.AddressCode()[addressCode] == "" {
 		abandoned = 1
 	}
 
@@ -118,7 +118,7 @@ func FakeRequireId(isEighteen bool, address string, birthday string, sex int) st
 	// 生成地址码
 	var addressCode string
 	if address == "" {
-		for i, s := range data.AddressCode {
+		for i, s := range data.AddressCode() {
 			addressCode = cast.ToString(i)
 			address = s
 			break

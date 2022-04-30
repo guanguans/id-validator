@@ -44,7 +44,7 @@ func generatorCheckBit(body string) string {
 // 生成地址码
 func generatorAddressCode(address string) string {
 	addressCode := ""
-	for code, addressStr := range data.AddressCode {
+	for code, addressStr := range data.AddressCode() {
 		if address == addressStr {
 			addressCode = cast.ToString(code)
 			break
@@ -96,7 +96,7 @@ func addressCodeClassification(addressCode string) string {
 func getRandAddressCode(pattern string) string {
 	mustCompile := regexp.MustCompile(pattern)
 	var keys []string
-	for key := range data.AddressCode {
+	for key := range data.AddressCode() {
 		keyStr := cast.ToString(key)
 		if mustCompile.MatchString(keyStr) && substr(keyStr, 4, 6) != "00" {
 			keys = append(keys, keyStr)
