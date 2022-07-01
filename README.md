@@ -9,6 +9,9 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/guanguans/id-validator)](https://goreportcard.com/report/github.com/guanguans/id-validator)
 [![GoDoc](https://godoc.org/github.com/guanguans/id-validator?status.svg)](https://godoc.org/github.com/guanguans/id-validator)
 [![GitHub release](https://img.shields.io/github/tag/guanguans/id-validator.svg)](https://github.com/guanguans/id-validator/releases)
+![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/guanguans/id-validator)
+![GitHub repo size](https://img.shields.io/github/repo-size/guanguans/id-validator)
+![GitHub all releases](https://img.shields.io/github/downloads/guanguans/id-validator/total)
 [![GitHub license](https://img.shields.io/github/license/guanguans/id-validator.svg)](https://github.com/guanguans/id-validator/blob/master/LICENSE)
 
 ## 功能
@@ -20,7 +23,7 @@
 
 ## 环境要求
 
-* Go >= 1.11
+* Go >= 1.14
 
 ## 安装
 
