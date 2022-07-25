@@ -83,7 +83,7 @@ func GetInfo(id string, strict bool) (IdInfo, error) {
 
 	// 性别
 	sex := 1
-	if (cast.ToInt(code["order"]) % 2) == 0 {
+	if (cast.ToInt(code["order"][2]) % 2) == 0 {
 		sex = 0
 	}
 
