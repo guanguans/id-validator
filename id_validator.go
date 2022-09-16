@@ -6,6 +6,7 @@ package idvalidator
 
 import (
 	"errors"
+	"strconv"
 	"time"
 
 	"github.com/guanguans/id-validator/data"
@@ -83,7 +84,8 @@ func GetInfo(id string, strict bool) (IdInfo, error) {
 
 	// 性别
 	sex := 1
-	if (cast.ToInt(code["order"]) % 2) == 0 {
+	order, _ := strconv.Atoi(code["order"])
+	if (order % 2) == 0 {
 		sex = 0
 	}
 
