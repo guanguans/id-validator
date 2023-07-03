@@ -59,6 +59,13 @@ func TestIsValid(t *testing.T) {
 	}
 }
 
+func TestInvalidId(t *testing.T) {
+	id := "TES12345678901 j"
+	if IsValid(id, false) {
+		t.Errorf("ID must be invalid.: %s", id)
+	}
+}
+
 func TestGetInfo(t *testing.T) {
 	_, e1 := GetInfo("500154199301135886", false)
 	if e1 != nil {
