@@ -2,6 +2,19 @@
 
 All notable changes to `guanguans/id-validator` will be documented in this file
 
+## v1.2.8 - 2023-07-04
+
+### What's Changed
+
+- Bump github.com/spf13/cast from 1.4.1 to 1.5.0 by @dependabot in https://github.com/guanguans/id-validator/pull/27
+- fix: 性别计算错误 ,男性计算为女性 by @jonbenzhang in https://github.com/guanguans/id-validator/pull/29
+
+### New Contributors
+
+- @jonbenzhang made their first contribution in https://github.com/guanguans/id-validator/pull/29
+
+**Full Changelog**: https://github.com/guanguans/id-validator/compare/v1.2.7...v1.2.8
+
 ## v1.2.7 - 2022-04-30
 
 **Full Changelog**: https://github.com/guanguans/id-validator/compare/v1.2.6...v1.2.7
