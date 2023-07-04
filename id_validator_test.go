@@ -19,6 +19,7 @@ func TestIsValid(t *testing.T) {
 		"440308199901101513", // 验证码不合法
 		"610104620932690",    // 出生日期码不合法
 		"11010119900307867X", // 校验位不合法
+		"TES12345678901 j",   // 特殊字符格式不合法
 	}
 	for _, id := range errIds {
 		if IsValid(id, false) {
@@ -56,13 +57,6 @@ func TestIsValid(t *testing.T) {
 		if IsValid(id, true) {
 			t.Errorf("ID must be strict valid.: %s", id)
 		}
-	}
-}
-
-func TestInvalidId(t *testing.T) {
-	id := "TES12345678901 j"
-	if IsValid(id, false) {
-		t.Errorf("ID must be invalid.: %s", id)
 	}
 }
 
