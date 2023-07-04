@@ -35,6 +35,9 @@ func generateShortCode(id string) (map[string]string, error) {
 
 	mustCompile := regexp.MustCompile("(.{6})(.{6})(.{3})")
 	subMatch := mustCompile.FindStringSubmatch(strings.ToLower(id))
+	if len(subMatch) < 4 {
+		return nil, errors.New("error extract submatch(shortCode)")
+	}
 
 	return map[string]string{
 		"body":         subMatch[0],
@@ -53,6 +56,9 @@ func generateLongCode(id string) (map[string]string, error) {
 	}
 	mustCompile := regexp.MustCompile("((.{6})(.{8})(.{3}))(.)")
 	subMatch := mustCompile.FindStringSubmatch(strings.ToLower(id))
+	if len(subMatch) < 6 {
+		return nil, errors.New("error extract submatch(longCode)")
+	}
 
 	return map[string]string{
 		"body":         subMatch[1],
