@@ -2,6 +2,20 @@
 
 All notable changes to `guanguans/id-validator` will be documented in this file
 
+## v1.2.9 - 2023-07-04
+
+### What's Changed
+
+- Bump actions/setup-go from 3 to 4 by @dependabot in https://github.com/guanguans/id-validator/pull/32
+- Bump github.com/spf13/cast from 1.5.0 to 1.5.1 by @dependabot in https://github.com/guanguans/id-validator/pull/35
+- fix panic with wrong format by @shuxiao9058 in https://github.com/guanguans/id-validator/pull/37
+
+### New Contributors
+
+- @shuxiao9058 made their first contribution in https://github.com/guanguans/id-validator/pull/37
+
+**Full Changelog**: https://github.com/guanguans/id-validator/compare/v1.2.8...v1.2.9
+
 ## v1.2.8 - 2022-09-16
 
 ### What's Changed
