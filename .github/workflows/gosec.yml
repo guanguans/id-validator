@@ -11,7 +11,7 @@ on:
       - master
 
 jobs:
-  tests:
+  gosec:
     runs-on: ubuntu-latest
     env:
       GO111MODULE: on
