@@ -14,10 +14,10 @@ vet:
 	go vet ./..。
 
 test:
-	go test ./... -cover -coverprofile=cover.out -v
+	go test ./... -cover -coverprofile=coverage -covermode=atomic -race -v
 
 bench:
 	go test ./... -bench=. -benchmem -v
 
 cover:
-	go tool cover -html=cover.out
+	go tool cover -html=coverage
