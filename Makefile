@@ -11,7 +11,7 @@ fmt:
 	go fmt ./...
 
 vet:
-	go vet ./..。
+	go vet ./...
 
 test:
 	go test ./... -cover -coverprofile=coverage -covermode=atomic -race -v
