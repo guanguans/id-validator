@@ -2,6 +2,24 @@
 
 All notable changes to `guanguans/id-validator` will be documented in this file
 
+## v1.3.0 - 2024-04-29
+
+### What's Changed
+
+* Bump actions/checkout from 3 to 4 by @dependabot in https://github.com/guanguans/id-validator/pull/38
+* Bump stefanzweifel/git-auto-commit-action from 4 to 5 by @dependabot in https://github.com/guanguans/id-validator/pull/40
+* Bump actions/cache from 3 to 4 by @dependabot in https://github.com/guanguans/id-validator/pull/43
+* Bump actions/setup-go from 4 to 5 by @dependabot in https://github.com/guanguans/id-validator/pull/42
+* Bump github.com/spf13/cast from 1.5.1 to 1.6.0 by @dependabot in https://github.com/guanguans/id-validator/pull/41
+* Bump golangci/golangci-lint-action from 3 to 5 by @dependabot in https://github.com/guanguans/id-validator/pull/46
+* Add basic ID validation and information extraction. by @whrss9527 in https://github.com/guanguans/id-validator/pull/47
+
+### New Contributors
+
+* @whrss9527 made their first contribution in https://github.com/guanguans/id-validator/pull/47
+
+**Full Changelog**: https://github.com/guanguans/id-validator/compare/v1.2.9...v1.3.0
+
 ## v1.2.9 - 2023-07-04
 
 ### What's Changed
