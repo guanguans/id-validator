@@ -24,7 +24,7 @@ jobs:
         with:
           go-version: ${{ matrix.go-version }}
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Run unit tests
         run: |
           # go mod init guanguans/id-validator
