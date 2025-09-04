@@ -155,3 +155,156 @@ func TestUpgradeId(t *testing.T) {
 		t.Errorf("`e2` must not be nil.: %v", e2)
 	}
 }
+
+// TestHistoricalAreaCodes tests validation of IDs with historical area codes
+// This addresses issue #60: 行政数据里不含老数据
+func TestHistoricalAreaCodes(t *testing.T) {
+	tests := []struct {
+		name      string
+		id        string
+		strict    bool
+		wantValid bool
+		wantAddr  string
+	}{
+		{
+			name:      "370284 born 2000 (valid period) - strict",
+			id:        "370284200001010015", // checksum calculated
+			strict:    true,
+			wantValid: true,
+			wantAddr:  "山东省青岛市胶南市",
+		},
+		{
+			name:      "370284 born 2000 (valid period) - loose",
+			id:        "370284200001010015",
+			strict:    false,
+			wantValid: true,
+			wantAddr:  "山东省青岛市胶南市",
+		},
+		{
+			name:      "370284 born 1994 (before valid period) - strict",
+			id:        "370284199401010019",
+			strict:    true,
+			wantValid: false,
+		},
+		{
+			name:      "370284 born 1994 (before valid period) - loose",
+			id:        "370284199401010019",
+			strict:    false,
+			wantValid: true,
+			wantAddr:  "山东省青岛市胶南市",
+		},
+		{
+			name:      "370284 born 2012 (after valid period) - strict",
+			id:        "370284201201010014",
+			strict:    true,
+			wantValid: false,
+		},
+		{
+			name:      "370284 born 2012 (after valid period) - loose",
+			id:        "370284201201010014",
+			strict:    false,
+			wantValid: true,
+			wantAddr:  "山东省青岛市胶南市",
+		},
+		{
+			name:      "370211 current area code - strict",
+			id:        "370211200001010017",
+			strict:    true,
+			wantValid: true,
+			wantAddr:  "山东省青岛市黄岛区",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			// Test validation
+			got := IsValid(tt.id, tt.strict)
+			if got != tt.wantValid {
+				t.Errorf("IsValid() = %v, want %v", got, tt.wantValid)
+			}
+
+			// Test GetInfo for valid cases
+			if tt.wantValid {
+				info, err := GetInfo(tt.id, tt.strict)
+				if err != nil {
+					t.Errorf("GetInfo() error = %v, want nil", err)
+					return
+				}
+
+				if info.Address != tt.wantAddr {
+					t.Errorf("GetInfo().Address = %v, want %v", info.Address, tt.wantAddr)
+				}
+
+				// Verify abandoned status for historical codes
+				if tt.id[0:6] == "370284" {
+					if info.Abandoned != 1 {
+						t.Errorf("Expected historical area code to be marked as abandoned, got %d", info.Abandoned)
+					}
+				}
+			}
+		})
+	}
+}
+
+// TestAreaCodeTransition tests the specific transition mentioned in issue #60
+func TestAreaCodeTransition(t *testing.T) {
+	// Test case: Someone born in 2000 when 370284 was valid
+	// Their ID should validate successfully
+	historicalId := "370284200001010015"
+	
+	// Should be valid in both modes
+	if !IsValid(historicalId, false) {
+		t.Error("Historical ID should be valid in loose mode")
+	}
+	
+	if !IsValid(historicalId, true) {
+		t.Error("Historical ID should be valid in strict mode when birth year is within valid period")
+	}
+	
+	// Should provide proper address information
+	info, err := GetInfo(historicalId, false)
+	if err != nil {
+		t.Fatalf("GetInfo() error = %v", err)
+	}
+	
+	expectedAddr := "山东省青岛市胶南市"
+	if info.Address != expectedAddr {
+		t.Errorf("Expected address %s, got %s", expectedAddr, info.Address)
+	}
+	
+	// Should be marked as abandoned since area code changed
+	if info.Abandoned != 1 {
+		t.Errorf("Expected Abandoned=1 for historical area code, got %d", info.Abandoned)
+	}
+	
+	// Birth year should be correctly parsed
+	expectedYear := 2000
+	if info.Birthday.Year() != expectedYear {
+		t.Errorf("Expected birth year %d, got %d", expectedYear, info.Birthday.Year())
+	}
+}
+
+// TestCurrentAreaCode tests the current area code that replaced the historical one
+func TestCurrentAreaCode(t *testing.T) {
+	// Test the current area code 370211 (黄岛区)
+	currentId := "370211200001010017"
+	
+	if !IsValid(currentId, true) {
+		t.Error("Current area code should be valid in strict mode")
+	}
+	
+	info, err := GetInfo(currentId, true)
+	if err != nil {
+		t.Fatalf("GetInfo() error = %v", err)
+	}
+	
+	expectedAddr := "山东省青岛市黄岛区"
+	if info.Address != expectedAddr {
+		t.Errorf("Expected address %s, got %s", expectedAddr, info.Address)
+	}
+	
+	// Should not be marked as abandoned
+	if info.Abandoned != 0 {
+		t.Errorf("Expected Abandoned=0 for current area code, got %d", info.Abandoned)
+	}
+}

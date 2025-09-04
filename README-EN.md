@@ -80,6 +80,38 @@ func main() {
 }
 ```
 
+## Historical Address Code Support
+
+This library fully supports validation of historical address codes, including codes that have changed due to administrative division adjustments.
+
+### Validation Modes
+
+* **Strict Mode (`strict=true`)**: Validates whether the birth date falls within the valid period of the address code
+* **Loose Mode (`strict=false`)**: Allows historical address codes without strict period checking
+
+### Example: Jiaonan City Address Code Change
+
+```go
+// 370284 Jiaonan City (1995-2011) -> 370211 Huangdao District (2012-present)
+
+// ID born in 2000 using 370284 is valid in both strict and loose modes
+idvalidator.IsValid("370284200001010015", true)  // true - 2000 is within valid period
+idvalidator.IsValid("370284200001010015", false) // true
+
+// ID born in 2012 using 370284 is only valid in loose mode
+idvalidator.IsValid("370284201201010014", true)  // false - 2012 exceeds valid period
+idvalidator.IsValid("370284201201010014", false) // true - loose mode allows it
+
+// Current address code 370211 is valid in all cases
+idvalidator.IsValid("370211202001010016", true)  // true
+```
+
+### Address Code Status
+
+In the `IdInfo` structure returned by `GetInfo()`:
+* `Abandoned` field: `1` indicates historical (abandoned) address code, `0` indicates currently valid address code
+* `Address` field: Shows the historical or current name corresponding to the address code
+
 ## Testing
 
 ```shell script
