@@ -78,7 +78,10 @@ func getAddress(addressCode string, birthdayCode string, strict bool) string {
 		}
 		if year >= cast.ToInt(startYear) && year <= cast.ToInt(endYear) {
 			address = val["address"]
+			break
 		}
+		startYear = "0001"
+		endYear = "9999"
 	}
 
 	if address == "" && !strict {
