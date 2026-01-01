@@ -70,6 +70,11 @@ func TestGetInfo(t *testing.T) {
 	if e2 == nil {
 		t.Errorf("`e2` must not be nil.: %v", e2)
 	}
+
+	_, e3 := GetInfo("330329200312314634", true)
+	if e3 != nil {
+		t.Errorf("`e3` must be nil.: %v", e3)
+	}
 }
 
 func TestFakeId(t *testing.T) {
