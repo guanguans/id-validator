@@ -25,6 +25,7 @@ type IdInfo struct {
 	Sex           int
 	Length        int
 	CheckBit      string
+	Age           int
 }
 
 // IsValid 验证身份证号合法性
@@ -95,6 +96,8 @@ func GetInfo(id string, strict bool) (IdInfo, error) {
 	// 长度
 	length := cast.ToInt(code["type"])
 
+	age := getAge(birthday)
+
 	return IdInfo{
 		AddressCode:   int(addressCode),
 		Abandoned:     abandoned,
@@ -106,6 +109,7 @@ func GetInfo(id string, strict bool) (IdInfo, error) {
 		Sex:           sex,
 		Length:        length,
 		CheckBit:      code["checkBit"],
+		Age:           age,
 	}, nil
 }
 
