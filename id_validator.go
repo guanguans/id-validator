@@ -61,12 +61,10 @@ func IsStrictValid(id string) bool {
 
 // GetInfo 获取身份证信息
 func GetInfo(id string, strict bool) (IdInfo, error) {
-	// 验证有效性
-	if !IsValid(id, strict) {
-		return IdInfo{}, errors.New("invalid ID card number")
+	code, err := generateCode(id)
+	if err != nil {
+		return IdInfo{}, err
 	}
-
-	code, _ := generateCode(id)
 	addressCode := cast.ToUint32(code["addressCode"])
 
 	// 地址信息
@@ -96,7 +94,7 @@ func GetInfo(id string, strict bool) (IdInfo, error) {
 	// 长度
 	length := cast.ToInt(code["type"])
 
-	age := getAge(birthday)
+	age := calculateAge(birthday)
 
 	return IdInfo{
 		AddressCode:   int(addressCode),

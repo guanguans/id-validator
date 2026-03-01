@@ -703,26 +703,16 @@ func addressCodeTimelineHeBei() map[uint32][]map[string]string {
 		},
 		130123: {
 			{
-				"address":    "栾城县",
-				"start_year": "1986",
-				"end_year":   "1992",
-			},
-			{
 				"address":    "正定县",
-				"start_year": "1993",
+				"start_year": "1983",
 				"end_year":   "",
 			},
 		},
 		130124: {
 			{
-				"address":    "正定县",
-				"start_year": "1986",
-				"end_year":   "1992",
-			},
-			{
 				"address":    "栾城县",
-				"start_year": "1993",
-				"end_year":   "2013",
+				"start_year": "1983",
+				"end_year":   "2014",
 			},
 		},
 		130125: {
@@ -10990,6 +10980,13 @@ func addressCodeTimelineHeiLongJiang() map[uint32][]map[string]string {
 				"address":    "呼兰区",
 				"start_year": "2004",
 				"end_year":   "",
+			},
+		},
+		230119: {
+			{
+				"address":    "阿城区",
+				"start_year": "",
+				"end_year":   "2005",
 			},
 		},
 		230112: {
@@ -55180,13 +55177,141 @@ func addressCodeTimelineXinJiang() map[uint32][]map[string]string {
 }
 
 func addressCodeTimelineXiangGang() map[uint32][]map[string]string {
-	return map[uint32][]map[string]string{810000: {
-		{
-			"address":    "香港特别行政区",
-			"start_year": "",
-			"end_year":   "",
+	return map[uint32][]map[string]string{
+		810000: {
+			{
+				"address":    "香港特别行政区",
+				"start_year": "",
+				"end_year":   "",
+			},
 		},
-	}}
+		810101: {
+			{
+				"address":    "中西区",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		810102: {
+			{
+				"address":    "东区",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		810103: {
+			{
+				"address":    "九龙城区",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		810104: {
+			{
+				"address":    "观塘区",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		810105: {
+			{
+				"address":    "南区",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		810106: {
+			{
+				"address":    "深水埗区",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		810107: {
+			{
+				"address":    "湾仔区",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		810108: {
+			{
+				"address":    "黄大仙区",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		810109: {
+			{
+				"address":    "油尖旺区",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		810110: {
+			{
+				"address":    "离岛区",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		810111: {
+			{
+				"address":    "葵青区",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		810112: {
+			{
+				"address":    "北区",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		810113: {
+			{
+				"address":    "西贡区",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		810114: {
+			{
+				"address":    "沙田区",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		810115: {
+			{
+				"address":    "屯门区",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		810116: {
+			{
+				"address":    "大埔区",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		810117: {
+			{
+				"address":    "荃湾区",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		810118: {
+			{
+				"address":    "元朗区",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+	}
 }
 
 func addressCodeTimelineAoMen() map[uint32][]map[string]string {
@@ -55194,6 +55319,27 @@ func addressCodeTimelineAoMen() map[uint32][]map[string]string {
 		820000: {
 			{
 				"address":    "澳门特别行政区",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		820101: {
+			{
+				"address":    "澳门半岛",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		820102: {
+			{
+				"address":    "氹仔岛",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		820103: {
+			{
+				"address":    "路环岛",
 				"start_year": "",
 				"end_year":   "",
 			},
@@ -55206,6 +55352,146 @@ func addressCodeTimelineTaiWan() map[uint32][]map[string]string {
 		830000: {
 			{
 				"address":    "台湾省",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		830101: {
+			{
+				"address":    "台北市",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		830102: {
+			{
+				"address":    "高雄市",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		830103: {
+			{
+				"address":    "新北市",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		830104: {
+			{
+				"address":    "台中市",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		830105: {
+			{
+				"address":    "台南市",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		830106: {
+			{
+				"address":    "桃园市",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		830107: {
+			{
+				"address":    "基隆市",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		830108: {
+			{
+				"address":    "新竹市",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		830109: {
+			{
+				"address":    "嘉义市",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		830110: {
+			{
+				"address":    "新竹县",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		830111: {
+			{
+				"address":    "苗栗县",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		830112: {
+			{
+				"address":    "彰化县",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		830113: {
+			{
+				"address":    "南投县",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		830114: {
+			{
+				"address":    "云林县",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		830115: {
+			{
+				"address":    "嘉义县",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		830116: {
+			{
+				"address":    "屏东县",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		830117: {
+			{
+				"address":    "宜兰县",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		830118: {
+			{
+				"address":    "花莲县",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		830119: {
+			{
+				"address":    "台东县",
+				"start_year": "",
+				"end_year":   "",
+			},
+		},
+		830120: {
+			{
+				"address":    "澎湖县",
 				"start_year": "",
 				"end_year":   "",
 			},

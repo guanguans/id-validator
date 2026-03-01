@@ -139,15 +139,13 @@ func substr(source string, start int, end int) string {
 	return string(r[start:end])
 }
 
-// getAge 计算年龄
-func getAge(birthday time.Time) int {
+// calculateAge 计算年龄
+func calculateAge(birthday time.Time) int {
 	now := time.Now()
 	age := now.Year() - birthday.Year()
-
-	// 如果今年还没过生日，年龄减1
-	if now.YearDay() < birthday.YearDay() {
+	// 检查生日是否已经过了今年
+	if now.Month() < birthday.Month() || (now.Month() == birthday.Month() && now.Day() < birthday.Day()) {
 		age--
 	}
-
 	return age
 }
