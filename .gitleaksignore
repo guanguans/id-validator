@@ -1,0 +1,2 @@
+# https://github.com/gitleaks/gitleaks/blob/master/.gitleaksignore
+tests/__snapshots__/HasOptionsTest__it_can_normalize_options__1.json:generic-api-key:24

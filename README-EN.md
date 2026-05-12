@@ -4,6 +4,15 @@
 
 > China ID number validator. - 中国身份证号验证器。
 
+[![tests](https://github.com/guanguans/id-validator/actions/workflows/tests.yml/badge.svg)](https://github.com/guanguans/id-validator/actions/workflows/tests.yml)
+[![codecov](https://codecov.io/gh/guanguans/id-validator/graph/badge.svg?token=7X523bI44b)](https://codecov.io/gh/guanguans/id-validator)
+[![Go Report Card](https://goreportcard.com/badge/github.com/guanguans/id-validator)](https://goreportcard.com/report/github.com/guanguans/id-validator)
+[![Go Reference](https://pkg.go.dev/badge/github.com/guanguans/id-validator.svg)](https://pkg.go.dev/github.com/guanguans/id-validator)
+[![GitHub go.mod Go version (branch)](https://img.shields.io/github/go-mod/go-version/guanguans/id-validator/main)](https://github.com/guanguans/id-validator/blob/main/go.mod)
+[![GitHub Tag](https://img.shields.io/github/v/tag/guanguans/id-validator)](https://github.com/guanguans/id-validator/tags)
+[![GitHub Release](https://img.shields.io/github/v/release/guanguans/id-validator)](https://github.com/guanguans/id-validator/releases)
+[![GitHub License](https://img.shields.io/github/license/guanguans/id-validator)](https://github.com/guanguans/id-validator/blob/main/LICENSE)
+
 ## Features
 
 * Verify China ID number
@@ -11,21 +20,15 @@
 * Upgrade 15-digit ID number to 18
 * Forged ID number that meets the verification
 
-## Requirement
-
-* Go >= 1.14
-
 ## Installation
 
-```shell script
-$ go get -u github.com/guanguans/id-validator
+```shell
+go get -u github.com/guanguans/id-validator
 ```
 
 ## Usage
 
-This is just a quick introduction, view the [GoDoc](https://godoc.org/github.com/guanguans/id-validator) for details.
-
-Let's start with a trivial example:
+This is just a quick introduction, view the [GoDoc](https://pkg.go.dev/github.com/guanguans/id-validator) for details.
 
 ```go
 package main
@@ -82,8 +85,8 @@ func main() {
 
 ## Testing
 
-```shell script
-$ make test
+```shell
+make test
 ```
 
 ## Changelog

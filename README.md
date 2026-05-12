@@ -5,14 +5,13 @@
 > China ID number validator. - 中国身份证号验证器。
 
 [![tests](https://github.com/guanguans/id-validator/actions/workflows/tests.yml/badge.svg)](https://github.com/guanguans/id-validator/actions/workflows/tests.yml)
-[![codecov](https://codecov.io/gh/guanguans/id-validator/branch/main/graph/badge.svg?token=7X523bI44b)](https://codecov.io/gh/guanguans/id-validator)
+[![codecov](https://codecov.io/gh/guanguans/id-validator/graph/badge.svg?token=7X523bI44b)](https://codecov.io/gh/guanguans/id-validator)
 [![Go Report Card](https://goreportcard.com/badge/github.com/guanguans/id-validator)](https://goreportcard.com/report/github.com/guanguans/id-validator)
-[![GoDoc](https://godoc.org/github.com/guanguans/id-validator?status.svg)](https://godoc.org/github.com/guanguans/id-validator)
-[![GitHub release](https://img.shields.io/github/tag/guanguans/id-validator.svg)](https://github.com/guanguans/id-validator/releases)
-![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/guanguans/id-validator)
-![GitHub repo size](https://img.shields.io/github/repo-size/guanguans/id-validator)
-![GitHub all releases](https://img.shields.io/github/downloads/guanguans/id-validator/total)
-[![GitHub license](https://img.shields.io/github/license/guanguans/id-validator.svg)](https://github.com/guanguans/id-validator/blob/master/LICENSE)
+[![Go Reference](https://pkg.go.dev/badge/github.com/guanguans/id-validator.svg)](https://pkg.go.dev/github.com/guanguans/id-validator)
+[![GitHub go.mod Go version (branch)](https://img.shields.io/github/go-mod/go-version/guanguans/id-validator/main)](https://github.com/guanguans/id-validator/blob/main/go.mod)
+[![GitHub Tag](https://img.shields.io/github/v/tag/guanguans/id-validator)](https://github.com/guanguans/id-validator/tags)
+[![GitHub Release](https://img.shields.io/github/v/release/guanguans/id-validator)](https://github.com/guanguans/id-validator/releases)
+[![GitHub License](https://img.shields.io/github/license/guanguans/id-validator)](https://github.com/guanguans/id-validator/blob/main/LICENSE)
 
 ## 功能
 
@@ -21,19 +20,15 @@
 * 升级 15 位身份证号为 18 位
 * 伪造符合校验的身份证号
 
-## 环境要求
-
-* Go >= 1.14
-
 ## 安装
 
-```shell script
-$ go get -u github.com/guanguans/id-validator
+```shell
+go get -u github.com/guanguans/id-validator
 ```
 
 ## 使用
 
-这只是一个快速介绍, 请查看 [GoDoc](https://godoc.org/github.com/guanguans/id-validator) 获得详细信息。
+这只是一个快速介绍, 请查看 [GoDoc](https://pkg.go.dev/github.com/guanguans/id-validator) 获得详细信息。
 
 ```go
 package main
@@ -90,8 +85,8 @@ func main() {
 
 ## 测试
 
-```shell script
-$ make test
+```shell
+make test
 ```
 
 ## 变更日志

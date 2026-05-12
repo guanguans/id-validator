@@ -1,14 +1,13 @@
 name: tests
 
 on:
+  workflow_dispatch:
   push:
-    branches: [main, master]
   pull_request:
-    branches: [main, master]
 
-env:
-  GOPROXY: "https://proxy.golang.org"
-  GO111MODULE: "on"
+#env:
+#  GOPROXY: "https://proxy.golang.org"
+#  GO111MODULE: "on"
 
 jobs:
   test:
@@ -23,21 +22,25 @@ jobs:
         uses: actions/setup-go@v6
         with:
           go-version: ${{ matrix.go-version }}
-      - name: Checkout code
+
+      - name: Checkout
         uses: actions/checkout@v6
+
       - name: Run unit tests
-        run: |
-          # go mod init guanguans/id-validator
-          go test -v -race -coverprofile=coverage -covermode=atomic ./...
-      - name: Upload coverage report to Codecov
+        run: make test
+
+      - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v6
         with:
-          file: ./coverage
-          flags: unittests
+          files: coverage
+          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          fail_ci_if_error: true # optional (default = false)
+          verbose: true # optional (default = false)
+
       - name: Cache downloaded modules
         uses: actions/cache@v5
         with:
           path: ~/go/pkg/mod
           key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
+          restore-keys: |-
             ${{ runner.os }}-go-
