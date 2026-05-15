@@ -7,6 +7,7 @@ package idvalidator
 import (
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/guanguans/id-validator/data"
 	"github.com/spf13/cast"
@@ -136,4 +137,15 @@ func substr(source string, start int, end int) string {
 	}
 
 	return string(r[start:end])
+}
+
+// calculateAge 计算年龄
+func calculateAge(birthday time.Time) int {
+	now := time.Now()
+	age := now.Year() - birthday.Year()
+	// 检查生日是否已经过了今年
+	if now.Month() < birthday.Month() || (now.Month() == birthday.Month() && now.Day() < birthday.Day()) {
+		age--
+	}
+	return age
 }
