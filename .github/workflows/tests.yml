@@ -30,7 +30,7 @@ jobs:
         run: make test
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v6
+        uses: codecov/codecov-action@v7
         with:
           files: coverage
           token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
