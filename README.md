@@ -112,6 +112,7 @@ make test
 * [jxlwqq/id-validator.py](https://github.com/jxlwqq/id-validator.py)，jxlwqq
 * [mc-zone/IDValidator](https://github.com/mc-zone/IDValidator)，mc-zone
 * [renyijiu/id_validator](https://github.com/renyijiu/id_validator)，renyijiu
+* [fangfengxiang/chinese-id-validator](https://github.com/fangfengxiang/chinese-id-validator)，fangfengxiang
 
 ## 参考资料
 
